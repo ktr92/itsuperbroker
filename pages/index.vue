@@ -1,7 +1,11 @@
 <template>
-  <Tutorial />
+  <div>
+    <AppLogin />
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  layout: 'AuthLayout'
+}
 </script>
