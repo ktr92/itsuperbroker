@@ -3,5 +3,5 @@ import { required } from 'vee-validate/dist/rules'
 
 extend('required', {
   ...required,
-  message: 'Обязательное поле'
+  message: ' '
 })

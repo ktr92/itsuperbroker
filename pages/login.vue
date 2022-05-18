@@ -1,9 +1,11 @@
 <template>
-  <div></div>
+  <div>
+    <AppLogin />
+  </div>
 </template>
 
 <script>
 export default {
-  layout: 'MainLayout'
+  layout: 'AuthLayout'
 }
 </script>
