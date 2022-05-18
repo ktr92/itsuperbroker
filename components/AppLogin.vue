@@ -3,7 +3,7 @@
     <div class="mb-8 text-center text-2xl">
       <h1>Авторизация</h1>
     </div>
-    <div v-if="$auth.loggedIn" class="text-green-500">
+    <div v-if="$auth.loggedIn" class="text-green-500 text-center">
       Авторизован!
     </div>
     <div v-else>
