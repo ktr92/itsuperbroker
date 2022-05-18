@@ -4,7 +4,7 @@
       <h1>Авторизация</h1>
     </div>
     <div v-if="$auth.loggedIn" class="text-green-500 text-center">
-      Авторизован!
+      Вы авторизованы!
     </div>
     <div v-else>
       <ValidationObserver v-slot="{ invalid }">
