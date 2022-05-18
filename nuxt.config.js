@@ -70,10 +70,19 @@ export default {
         token: {
           property: 'access_token'
         },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token'
+        },
         endpoints: {
           login: { url: '/api/auth/login', method: 'post', propertyName: 'access_token' },
           logout: { url: '/api/auth/logout', method: 'post' },
           user: false
+        },
+        autoLogout: false,
+        user: {
+          property: 'username',
+          autoFetch: true
         }
       }
     }

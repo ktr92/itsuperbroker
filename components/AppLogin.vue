@@ -84,11 +84,9 @@ export default {
       /*  const response = await this.$axios.post('https://api-broker.demo.ipotech.su/oauth2/token', this.userdata)
       console.log(response) */
       try {
-        const response = await this.$auth.loginWith('local', { data: this.userdata })
-        console.log(response)
+        await this.$auth.loginWith('local', { data: this.userdata })
       } catch (err) {
-        this.errors = err.message
-        console.log(err)
+        this.errors = err.response.data.message
       }
     }
   }
