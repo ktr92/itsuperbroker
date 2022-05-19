@@ -1,13 +1,15 @@
 <template>
   <div class="form-group mb-2">
-    <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
+    <ValidationProvider v-slot="{ errors }" rules="required" :immediate="true">
       <input
+        v-model="initialValue"
         :class="{'border-red-600': errors[0]}"
         :type="inputtype"
         :placeholder="inputplaceholder"
         :name="inputname"
         class="rounded border border-rose-600 px-4 py-2 w-full"
         autocomplete="off"
+        @change="handleInput"
         @input="handleInput"
       >
       <small v-if="errors" class="text-red-600">{{ errors[0] }}</small>
@@ -18,6 +20,11 @@
 <script>
 import { ValidationProvider } from 'vee-validate'
 export default {
+  $_veeValidate: {
+    value () {
+      return this.$el.value
+    }
+  },
   components: {
     ValidationProvider
   },
@@ -26,10 +33,6 @@ export default {
       type: String,
       default: ''
     },
-    inputtype: {
-      type: String,
-      default: 'text'
-    },
     inputplaceholder: {
       type: String,
       default: ''
@@ -37,11 +40,15 @@ export default {
     inputname: {
       type: String,
       default: ''
+    },
+    inputtype: {
+      type: String,
+      default: 'text'
     }
   },
   data () {
     return {
-      content: this.value
+      initialValue: ''
     }
   },
   computed: {
@@ -50,8 +57,8 @@ export default {
     }
   },
   methods: {
-    handleInput () {
-      this.$emit('input', this.content)
+    handleInput (event) {
+      this.$emit('input', event.target.value)
     }
   }
 }

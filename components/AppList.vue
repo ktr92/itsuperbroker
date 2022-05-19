@@ -8,24 +8,26 @@
     </p>
     <div v-else>
       <table v-if="items" class="my-4">
-        <tr
-          v-for="item in items.data"
-          :key="item.id"
-          class="p-4"
-        >
-          <td class="p-2 border-b-2">
-            <b>ID</b>: {{ item.id }}
-          </td>
-          <td class="p-2 border-b-2">
-            <b>Имя</b>: {{ item.firstName }}
-          </td>
-          <td class="p-2 border-b-2">
-            <b>Банк</b>: {{ item.bank.name }}
-          </td>
-          <td class="p-2 border-b-2">
-            <b>Email</b>: {{ item.email }}
-          </td>
-        </tr>
+        <tbody>
+          <tr
+            v-for="item in items"
+            :key="item.id"
+            class="p-4"
+          >
+            <td class="p-2 border-b-2">
+              <b>ID</b>: {{ item.id }}
+            </td>
+            <td class="p-2 border-b-2">
+              <b>Имя</b>: {{ item.firstName }}
+            </td>
+            <td class="p-2 border-b-2">
+              <b>Банк</b>: {{ item.bank.name }}
+            </td>
+            <td class="p-2 border-b-2">
+              <b>Email</b>: {{ item.email }}
+            </td>
+          </tr>
+        </tbody>
       </table>
       <button
         class="bg-green-500 rounded text-white px-8 py-2"

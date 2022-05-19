@@ -1,135 +1,80 @@
 <template>
-  <div>
-    <div class="text-green-500 text-center">
-      <button @click="!showform">
+  <div class="container p-8">
+    <div>
+      <button
+        class="py-2 px-8 mb-4 rounded inline-block text-white bg-blue-400"
+        :class="{'opacity-80': showform}"
+        @click="showform = !showform">
         Добавить куратора
       </button>
     </div>
-    <div v-if="showform">
-      <ValidationObserver v-slot="{ invalid }">
-        <form @submit.prevent="onSubmit">
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="formData.email"
-                :class="{'border-red-600': errors[0]}"
-                type="text"
-                placeholder="Email"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="email"
-                autocomplete="off"
+    <transition name="slide">
+      <div v-if="showform">
+        <ValidationObserver v-slot="{ invalid }">
+          <form @submit.prevent="onSubmit">
+            <AppInput
+              v-model="formData.email"
+              inputtype="text"
+              inputplaceholder="Email"
+              inputname="email"
+            />
+            <AppInput
+              v-model="formData.firstName"
+              inputtype="text"
+              inputplaceholder="Имя"
+              inputname="firstName"
+            />
+            <AppInput
+              v-model="formData.lastName"
+              inputtype="text"
+              inputplaceholder="Фамилия"
+              inputname="lastName"
+            />
+            <AppInput
+              v-model="formData.middleName"
+              inputtype="text"
+              inputplaceholder="Отчество"
+              inputname="middleName"
+            />
+            <AppInput
+              v-model="formData.phone"
+              inputtype="text"
+              inputplaceholder="Телефон"
+              inputname="phone"
+            />
+            <AppInput
+              v-model="formData.partner"
+              inputtype="text"
+              inputplaceholder="Партнер"
+              inputname="partner"
+            />
+            <AppInput
+              v-model="formData.bank"
+              inputtype="text"
+              inputplaceholder="Банк"
+              inputname="bank"
+            />
+            <div class="form-group mb-2">
+              <button
+                type="submit"
+                class="bg-green-500 rounded text-white px-8 py-2 font-bold"
+                :disabled="invalid"
               >
-              <small v-if="errors" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="formData.firstName"
-                :class="{'border-red-600': errors[0]}"
-                type="text"
-                placeholder="Имя"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="firstName"
-                autocomplete="off"
-              >
-              <small v-if="errors[0]" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="formData.lastName"
-                :class="{'border-red-600': errors[0]}"
-                type="text"
-                placeholder="Фамилия"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="lastName"
-                autocomplete="off"
-              >
-              <small v-if="errors[0]" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="formData.middleName"
-                :class="{'border-red-600': errors[0]}"
-                type="text"
-                placeholder="Отчество"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="middleName"
-                autocomplete="off"
-              >
-              <small v-if="errors[0]" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="formData.phone"
-                :class="{'border-red-600': errors[0]}"
-                type="tel"
-                placeholder="Телефон"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="phone"
-                autocomplete="off"
-              >
-              <small v-if="errors[0]" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="formData.partner"
-                :class="{'border-red-600': errors[0]}"
-                type="text"
-                placeholder="Партнер"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="partner"
-                autocomplete="off"
-              >
-              <small v-if="errors[0]" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="formData.bank"
-                :class="{'border-red-600': errors[0]}"
-                type="text"
-                placeholder="Банк"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="bank"
-                autocomplete="off"
-              >
-              <small v-if="errors[0]" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
-          <div class="form-group mb-2">
-            <button
-              type="submit"
-              class="cursor-pointer rounded text-white font-bold px-4 py-2 w-full uppercase bg-green-500 hover:bg-green-600 transition duration-150 ease-in-out"
-              :disabled="invalid"
-            >
-              Создать
-            </button>
-            <div v-if="errormessage" class="text-red-600">
-              {{ errormessage }}
+                Создать
+              </button>
             </div>
-          </div>
-        </form>
-      </ValidationObserver>
-    </div>
+          </form>
+        </ValidationObserver>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { ValidationObserver } from 'vee-validate'
 
 export default {
   components: {
-    ValidationProvider,
     ValidationObserver
   },
   data () {
@@ -137,18 +82,13 @@ export default {
       showform: true,
       formData: {
         email: '',
-        firstName: '',
-        lastName: '',
-        middleName: '',
-        phone: '',
-        partner: '',
-        bank: ''
+        firstName: 'test',
+        lastName: 'test',
+        middleName: 'test',
+        phone: 'test',
+        partner: 'test',
+        bank: 'test'
       }
-    }
-  },
-  computed: {
-    errormessage () {
-      return this.errors
     }
   },
   methods: {
