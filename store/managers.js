@@ -5,6 +5,9 @@ export const state = () => ({
 export const mutations = {
   setManagers (state, payload) {
     state.managers = payload
+  },
+  addManager (state, payload) {
+    state.managers.push(payload)
   }
 }
 
@@ -15,6 +18,16 @@ export const actions = {
       commit('setManagers', data.data)
     } catch (e) {
       dispatch('setMessage', { value: 'Не удалось получить список менеджеров', type: 'error' }, { root: true })
+    }
+  },
+  async add ({ dispatch, commit }, payload) {
+    try {
+      const response = await this.$axios.post('https://api-broker.demo.ipotech.su/api/v1/bank/manager', payload)
+      if (response.data.length) {
+        commit('addManager', payload)
+      }
+    } catch (e) {
+      dispatch('setMessage', { value: 'Не удалось создать менеджера', type: 'error' }, { root: true })
     }
   }
 }

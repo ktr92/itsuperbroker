@@ -1,6 +1,7 @@
 <template>
   <div>
     <AppList />
+    <AppAddform />
   </div>
 </template>
 

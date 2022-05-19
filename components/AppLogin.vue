@@ -102,4 +102,7 @@ export default {
     cursor: not-allowed;
     background: #ccc;
   }
+  * {
+    outline: none !important;
+  }
 </style>
