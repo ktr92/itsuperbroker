@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-8">
+  <div class="w-full p-4">
     <h1 class="my-4">
       Список кураторов
     </h1>
@@ -26,12 +26,20 @@
             <td class="p-2 border-b-2">
               <b>Email</b>: {{ item.email }}
             </td>
+            <td class="p-2 border-b-2">
+              <button
+                class="bg-red-400 rounded text-white px-4"
+                @click="remove(item.id)"
+              >
+                Удалить
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
       <button
         class="bg-green-500 rounded text-white px-8 py-2"
-        @click="getManagers"
+        @click="getItems"
       >
         Обновить список кураторов
       </button>
@@ -50,8 +58,13 @@ export default {
     }
   },
   methods: {
-    getManagers () {
+    getItems () {
       this.$fetch()
+    },
+    async remove (id) {
+      if (confirm(`Удалить ${this.$store.getters['managers/managerid'](id).email}?`)) {
+        await this.$store.dispatch('managers/remove', id)
+      }
     }
   }
 }

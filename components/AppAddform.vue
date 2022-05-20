@@ -1,15 +1,10 @@
 <template>
-  <div class="container p-8 max-w-md">
-    <div>
-      <button
-        class="py-2 px-8 mb-4 rounded inline-block text-white bg-blue-400"
-        :class="{'opacity-80': showform}"
-        @click="showform = !showform">
-        Добавить куратора
-      </button>
+  <div class="container p-4 w-full rounded border-2">
+    <div class="mb-4">
+      <h2>Добавление куратора</h2>
     </div>
     <transition name="slide">
-      <div v-if="showform">
+      <div>
         <ValidationObserver v-slot="{ invalid }">
           <form @submit.prevent="onSubmit">
             <AppInput
@@ -73,7 +68,6 @@ export default {
   },
   data () {
     return {
-      showform: true,
       formData: {
         email: '',
         firstName: 'test',

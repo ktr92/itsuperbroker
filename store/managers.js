@@ -8,6 +8,9 @@ export const mutations = {
   },
   addManager (state, payload) {
     state.managers.push(payload)
+  },
+  removeManager (state, payload) {
+    state.managers = state.managers.filter(item => item.id !== payload)
   }
 }
 
@@ -29,9 +32,20 @@ export const actions = {
     } catch (e) {
       dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }
+  },
+  async remove ({ dispatch, commit, getters }, payload) {
+    try {
+      await this.$axios.delete(`https://api-broker.demo.ipotech.su/api/v1/bank/manager/${payload}`).then((response) => {
+        dispatch('setMessage', { value: `${getters.managerid(payload).email} удален`, type: 'warn' }, { root: true })
+      })
+      commit('removeManager', payload)
+    } catch (e) {
+      dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
+    }
   }
 }
 
 export const getters = {
-  managers: state => state.managers
+  managers: state => state.managers,
+  managerid: state => id => state.managers.find(item => item.id === id)
 }
