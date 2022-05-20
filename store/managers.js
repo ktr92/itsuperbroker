@@ -14,10 +14,10 @@ export const mutations = {
 export const actions = {
   async fetch ({ dispatch, commit }, id) {
     try {
-      const data = await this.$axios.get('https://api-broker.demo.ipotech.su/api/v1/bank/manager/list?page=1&limit=10')
+      const data = await this.$axios.get('https://api-broker.demo.ipotech.su/api/v1/bank/manager/list?page=1&limit=30')
       commit('setManagers', data.data.data)
     } catch (e) {
-      dispatch('setMessage', { value: 'Не удалось получить список менеджеров', type: 'error' }, { root: true })
+      dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }
   },
   async add ({ dispatch, commit }, payload) {
@@ -27,7 +27,7 @@ export const actions = {
         commit('addManager', response.data)
       }
     } catch (e) {
-      dispatch('setMessage', { value: 'Не удалось создать менеджера', type: 'error' }, { root: true })
+      dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }
   }
 }

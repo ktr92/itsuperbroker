@@ -1,7 +1,11 @@
 import { extend } from 'vee-validate'
-import { required } from 'vee-validate/dist/rules'
+import { required, email } from 'vee-validate/dist/rules'
 
 extend('required', {
   ...required,
-  message: ' '
+  message: 'Обязательное поле'
+})
+extend('email', {
+  ...email,
+  message: 'Некорректный email'
 })

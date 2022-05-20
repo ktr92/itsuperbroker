@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-8">
+  <div class="container p-8 max-w-md">
     <div>
       <button
         class="py-2 px-8 mb-4 rounded inline-block text-white bg-blue-400"
@@ -14,43 +14,37 @@
           <form @submit.prevent="onSubmit">
             <AppInput
               v-model="formData.email"
-              inputtype="text"
+              inputtype="email"
               inputplaceholder="Email"
               inputname="email"
             />
             <AppInput
               v-model="formData.firstName"
-              inputtype="text"
               inputplaceholder="Имя"
               inputname="firstName"
             />
             <AppInput
               v-model="formData.lastName"
-              inputtype="text"
               inputplaceholder="Фамилия"
               inputname="lastName"
             />
             <AppInput
               v-model="formData.middleName"
-              inputtype="text"
               inputplaceholder="Отчество"
               inputname="middleName"
             />
             <AppInput
               v-model="formData.phone"
-              inputtype="text"
               inputplaceholder="Телефон"
               inputname="phone"
             />
             <AppInput
               v-model="formData.partner"
-              inputtype="text"
               inputplaceholder="Партнер"
               inputname="partner"
             />
             <AppInput
               v-model="formData.bank"
-              inputtype="text"
               inputplaceholder="Банк"
               inputname="bank"
             />
@@ -86,8 +80,8 @@ export default {
         lastName: 'test',
         middleName: 'test',
         phone: 'test',
-        partner: 'test',
-        bank: 'test'
+        partner: '7',
+        bank: '10'
       }
     }
   },
@@ -95,8 +89,8 @@ export default {
     async onSubmit () {
       try {
         await this.$store.dispatch('managers/add', this.formData)
-      } catch (err) {
-        this.errors = err.response.data.message
+      } catch (e) {
+        this.$store.dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
       }
     }
   }

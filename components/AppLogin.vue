@@ -9,34 +9,17 @@
     <div v-else>
       <ValidationObserver v-slot="{ invalid }">
         <form @submit.prevent="onSubmit">
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="userdata.username"
-                :class="{'border-red-600': errors[0]}"
-                type="text"
-                placeholder="Логин"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="login"
-                autocomplete="off"
-              >
-              <small v-if="errors" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
-          <div class="form-group mb-2">
-            <ValidationProvider rules="required" :immediate="true" v-slot="{ errors }">
-              <input
-                v-model="userdata.password"
-                :class="{'border-red-600': errors[0]}"
-                type="password"
-                placeholder="Пароль"
-                class="rounded border border-rose-600 px-4 py-2 w-full"
-                name="login"
-                autocomplete="off"
-              >
-              <small v-if="errors[0]" class="text-red-600">{{ errors[0] }}</small>
-            </ValidationProvider>
-          </div>
+          <AppInput
+            v-model="userdata.username"
+            inputplaceholder="Логин"
+            inputname="login"
+          />
+          <AppInput
+            v-model="userdata.password"
+            inputtype="password"
+            inputplaceholder="Пароль"
+            inputname="pass"
+          />
           <div class="form-group mb-2">
             <button
               type="submit"
@@ -54,11 +37,10 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { ValidationObserver } from 'vee-validate'
 
 export default {
   components: {
-    ValidationProvider,
     ValidationObserver
   },
   data () {
@@ -81,12 +63,10 @@ export default {
   },
   methods: {
     async onSubmit () {
-      /*  const response = await this.$axios.post('https://api-broker.demo.ipotech.su/oauth2/token', this.userdata)
-      console.log(response) */
       try {
         await this.$auth.loginWith('local', { data: this.userdata })
-      } catch (err) {
-        this.errors = err.response.data.message
+      } catch (e) {
+        this.$store.dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
       }
     }
   }

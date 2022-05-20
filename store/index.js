@@ -1,3 +1,7 @@
+export const state = () => ({
+  message: null
+})
+
 export const actions = {
   // добавление сообщения об ошибке, и удаление через 5 сек
   setMessage ({ commit }, message) {
