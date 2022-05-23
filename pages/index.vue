@@ -1,7 +1,12 @@
 <template>
-  <div class="container columns-2 py-4 px-2">
-    <AppList />
-    <AppAddform />
+  <div>
+    <div class="container columns-2 py-4 px-2">
+      <AppList />
+      <AppAddform />
+    </div>
+    <div class="container columns-2 py-4 px-2">
+      <AppListBroker />
+    </div>
   </div>
 </template>
 
