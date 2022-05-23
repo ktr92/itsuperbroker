@@ -1,22 +1,36 @@
+import { post } from "./api";
+
 export default {
   head: {
     title: 'superbroker-fe',
     htmlAttrs: {
       lang: 'en'
     },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+    meta: [{
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: ''
+      },
+      {
+        name: 'format-detection',
+        content: 'telephone=no'
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }]
   },
 
-  css: [
-  ],
+  css: [],
 
   components: true,
 
@@ -67,6 +81,7 @@ export default {
   auth: {
     strategies: {
       local: {
+        scheme: 'refresh',
         token: {
           property: 'access_token'
         },
@@ -75,15 +90,30 @@ export default {
           data: 'refresh_token'
         },
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post', propertyName: 'access_token' },
-          logout: { url: '/api/auth/logout', method: 'post' },
+          login: {
+            url: '/api/auth/login',
+            method: 'post',
+            propertyName: 'access_token'
+          },
+          logout: {
+            url: '/api/auth/logout',
+            method: 'post'
+          },
+          refresh: {
+            url: '/api/auth/refresh',
+            method: 'post',
+            propertyName: 'access_token'
+          },
           user: false
         },
         autoLogout: false,
         user: {
           property: 'username',
           autoFetch: true
-        }
+        },
+        clientId: 'c3ff36379fd0aff317297ed1d1b45b80',
+        grantType: 'password',
+        scope: ['broker']
       }
     }
   },
