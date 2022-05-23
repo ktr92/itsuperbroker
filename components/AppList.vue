@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     items () {
-      return this.$store.getters['managers/managers']
+      return this.$store.getters['managers/managerbybank']([1, 10])
     }
   },
   methods: {

@@ -47,5 +47,6 @@ export const actions = {
 
 export const getters = {
   managers: state => state.managers,
-  managerid: state => id => state.managers.find(item => item.id === id)
+  managerid: state => id => state.managers.find(item => item.id === id),
+  managerbybank: state => ids => state.managers.filter(item => ids.includes(item.bank.id))
 }
