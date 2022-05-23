@@ -1,4 +1,3 @@
-import { post } from "./api";
 
 export default {
   head: {
@@ -102,7 +101,8 @@ export default {
           refresh: {
             url: '/api/auth/refresh',
             method: 'post',
-            propertyName: 'access_token'
+            propertyName: 'access_token',
+            scope: true
           },
           user: false
         },
@@ -111,11 +111,15 @@ export default {
           property: 'username',
           autoFetch: true
         },
-        clientId: 'c3ff36379fd0aff317297ed1d1b45b80',
         grantType: 'password',
         scope: ['broker']
       }
     }
+  },
+
+  env: {
+    client_id: 'c3ff36379fd0aff317297ed1d1b45b80',
+    client_secret: '7d094bf4175b0a95890b30a8c260597449b086aac70729444d72a4b2d11f3ee0ba05356ee4e63bd28f26f8f63ae40c685f6e0ae9512b38902c63e652b1c6621c'
   },
 
   axios: {

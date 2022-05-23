@@ -48,8 +48,7 @@ export default {
       errors: null,
       userdata: {
         username: 'ivanov@ipotech.su',
-        password: 'c2d3e1de1',
-        client_secret: '7d094bf4175b0a95890b30a8c260597449b086aac70729444d72a4b2d11f3ee0ba05356ee4e63bd28f26f8f63ae40c685f6e0ae9512b38902c63e652b1c6621c',
+        password: 'c2d3e1de1'
       }
     }
   },
@@ -61,7 +60,7 @@ export default {
   methods: {
     async onSubmit () {
       try {
-        await this.$auth.loginWith('local', { data: this.userdata })
+        await this.$auth.loginWith('local', { data: { ...this.userdata, client_id: process.env.client_id, client_secret: process.env.client_secret } })
       } catch (e) {
         this.$store.dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
       }
