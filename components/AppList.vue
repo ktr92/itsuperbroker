@@ -7,10 +7,11 @@
       Загрузка данных...
     </p>
     <div v-else>
-      <table v-if="items" class="my-4">
+      <AppFilter :data="banks" @filterlist="filterlist" />
+      <table v-if="itemsSelected" class="my-4">
         <tbody>
           <tr
-            v-for="item in items"
+            v-for="item in itemsSelected"
             :key="item.id"
             class="p-4"
           >
@@ -49,13 +50,27 @@
 
 <script>
 export default {
+  data () {
+    return {
+      filterdata: []
+    }
+  },
   async fetch () {
     await this.$store.dispatch('managers/fetch')
   },
   computed: {
     items () {
-      return this.$store.getters['managers/managerbybank']([1, 10])
+      return this.$store.getters['managers/managers']
+    },
+    itemsSelected () {
+      return this.$store.getters['managers/managerbybank'](this.filterdata)
+    },
+    banks () {
+      return this.items.map(item => item.bank)
     }
+  },
+  mounted () {
+    this.filterdata = this.banks.map(item => item.id)
   },
   methods: {
     getItems () {
@@ -65,6 +80,9 @@ export default {
       if (confirm(`Удалить ${this.$store.getters['managers/managerid'](id).email}?`)) {
         await this.$store.dispatch('managers/remove', id)
       }
+    },
+    filterlist (data) {
+      this.filterdata = data
     }
   }
 }
