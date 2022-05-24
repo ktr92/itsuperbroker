@@ -52,7 +52,7 @@
 export default {
   data () {
     return {
-      filterdata: []
+      filterdata: null
     }
   },
   async fetch () {
@@ -63,14 +63,11 @@ export default {
       return this.$store.getters['managers/managers']
     },
     itemsSelected () {
-      return this.$store.getters['managers/managerbybank'](this.filterdata)
+      return this.$store.getters['managers/managerbybank'](this.filterdata || this.banks.map(i => i.id))
     },
     banks () {
       return this.items.map(item => item.bank)
     }
-  },
-  mounted () {
-    this.filterdata = this.banks.map(item => item.id)
   },
   methods: {
     getItems () {
