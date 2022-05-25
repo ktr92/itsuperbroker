@@ -7,6 +7,7 @@
       Загрузка данных...
     </p>
     <div v-else>
+      <AppSearch @searchlist="searchlist" />
       <AppFilter :data="banks" @filterlist="filterlist" />
       <table v-if="itemsSelected" class="my-4">
         <tbody>
@@ -49,37 +50,53 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { intersectionBy } from 'lodash'
+
 export default {
   data () {
     return {
-      filterdata: null
+      filterdata: [],
+      searchdata: []
     }
   },
   async fetch () {
     await this.$store.dispatch('managers/fetch')
   },
   computed: {
-    items () {
-      return this.$store.getters['managers/managers']
-    },
+    ...mapGetters('managers',
+      ['items']
+    ),
     itemsSelected () {
-      return this.$store.getters['managers/managerbybank'](this.filterdata || this.banks.map(i => i.id))
+      return intersectionBy(this.items, this.itemsSearch, this.itemsFiltered, 'id') || this.items
+    },
+    itemsFiltered () {
+      return this.items.filter(item => this.filterdata.includes(item.bank.id)) || this.items
+    },
+    itemsSearch () {
+      return this.items.filter(item => item.firstName.toLowerCase().includes(this.searchdata)) || this.items
     },
     banks () {
       return this.items.map(item => item.bank)
     }
+  },
+  mounted () {
+    this.filterdata = this.items.map(item => item.bank.id)
   },
   methods: {
     getItems () {
       this.$fetch()
     },
     async remove (id) {
-      if (confirm(`Удалить ${this.$store.getters['managers/managerid'](id).email}?`)) {
+      if (confirm(`Удалить ${this.$store.getters['managers/itembyid'](id).email}?`)) {
         await this.$store.dispatch('managers/remove', id)
       }
     },
     filterlist (data) {
       this.filterdata = data
+    },
+    searchlist (data) {
+      this.searchdata = data
     }
   }
 }

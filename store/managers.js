@@ -1,3 +1,4 @@
+
 export const state = () => ({
   managers: []
 })
@@ -5,6 +6,7 @@ export const state = () => ({
 export const mutations = {
   setManagers (state, payload) {
     state.managers = payload
+    state.itemsSelected = payload
   },
   addManager (state, payload) {
     state.managers.push(payload)
@@ -57,7 +59,7 @@ export const actions = {
     try {
       await this.$axios.delete(`https://api-broker.demo.ipotech.su/api/v1/bank/manager/${payload}`).then((response) => {
         dispatch('setMessage', {
-          value: `${getters.managerid(payload).email} удален`,
+          value: `${getters.itembyid(payload).email} удален`,
           type: 'warn'
         }, {
           root: true
@@ -76,7 +78,6 @@ export const actions = {
 }
 
 export const getters = {
-  managers: state => state.managers,
-  managerid: state => id => state.managers.find(item => item.id === id),
-  managerbybank: state => ids => (state.managers.filter(item => ids.includes(item.bank.id)) || state.managers)
+  items: state => state.managers,
+  itembyid: state => id => state.managers.find(item => item.id === id)
 }
