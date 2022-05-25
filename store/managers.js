@@ -6,7 +6,6 @@ export const state = () => ({
 export const mutations = {
   setManagers (state, payload) {
     state.managers = payload
-    state.itemsSelected = payload
   },
   addManager (state, payload) {
     state.managers.push(payload)
@@ -79,5 +78,6 @@ export const actions = {
 
 export const getters = {
   items: state => state.managers,
+  banks: state => state.managers.map(item => item.bank),
   itembyid: state => id => state.managers.find(item => item.id === id)
 }

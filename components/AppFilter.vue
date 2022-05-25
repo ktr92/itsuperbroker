@@ -38,6 +38,7 @@ export default {
     this.items = [...new Map(this.data.map(v => [v.id, v])).values()]
     this.selected = this.items.map(i => i.id)
   },
+
   methods: {
     change () {
       this.$emit('filterlist', this.selected)

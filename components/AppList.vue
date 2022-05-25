@@ -8,25 +8,34 @@
     </p>
     <div v-else>
       <AppSearch @searchlist="searchlist" />
-      <AppFilter :data="banks" @filterlist="filterlist" />
+      <AppFilter :key="banks.length" :data="banks" @filterlist="filterlist" />
       <table v-if="itemsSelected" class="my-4">
         <tbody>
           <tr
             v-for="item in itemsSelected"
             :key="item.id"
-            class="p-4"
+            class="p-4 text-sm"
           >
             <td class="p-2 border-b-2">
-              <b>ID</b>: {{ item.id }}
+              <b>ID</b><br> {{ item.id }}
             </td>
             <td class="p-2 border-b-2">
-              <b>Имя</b>: {{ item.firstName }}
+              <b>Имя</b><br> {{ item.firstName }}
             </td>
             <td class="p-2 border-b-2">
-              <b>Банк</b>: {{ item.bank.name }}
+              <b>Фамилия</b><br> {{ item.lastName }}
             </td>
             <td class="p-2 border-b-2">
-              <b>Email</b>: {{ item.email }}
+              <b>Отчество</b><br> {{ item.middleName }}
+            </td>
+            <td class="p-2 border-b-2">
+              <b>Банк</b><br> {{ item.bank.name }}
+            </td>
+            <td class="p-2 border-b-2">
+              <b>Email</b><br> {{ item.email }}
+            </td>
+            <td class="p-2 border-b-2">
+              <b>Телефон</b><br> {{ item.phone }}
             </td>
             <td class="p-2 border-b-2">
               <button
@@ -41,9 +50,9 @@
       </table>
       <button
         class="bg-green-500 rounded text-white px-8 py-2"
-        @click="getItems"
+        @click="refresh"
       >
-        Обновить список кураторов
+        Обновить
       </button>
     </div>
   </div>
@@ -65,7 +74,7 @@ export default {
   },
   computed: {
     ...mapGetters('managers',
-      ['items']
+      ['items', 'banks']
     ),
     itemsSelected () {
       return intersectionBy(this.items, this.itemsSearch, this.itemsFiltered, 'id') || this.items
@@ -74,23 +83,25 @@ export default {
       return this.items.filter(item => this.filterdata.includes(item.bank.id)) || this.items
     },
     itemsSearch () {
-      return this.items.filter(item => item.firstName.toLowerCase().includes(this.searchdata)) || this.items
-    },
-    banks () {
-      return this.items.map(item => item.bank)
+      return this.items.filter(item => this.findby(item, ['email', 'phone', 'firstName', 'lastName', 'middleName'])) || this.items
     }
   },
   mounted () {
     this.filterdata = this.items.map(item => item.bank.id)
   },
   methods: {
-    getItems () {
+    refresh () {
       this.$fetch()
+      this.filterdata = this.items.map(item => item.bank.id)
+      this.searchdata = []
     },
     async remove (id) {
       if (confirm(`Удалить ${this.$store.getters['managers/itembyid'](id).email}?`)) {
         await this.$store.dispatch('managers/remove', id)
       }
+    },
+    findby (obj, fields) {
+      return fields.some(item => obj[item].toLowerCase().includes(this.searchdata))
     },
     filterlist (data) {
       this.filterdata = data
