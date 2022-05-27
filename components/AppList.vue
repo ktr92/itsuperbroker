@@ -8,7 +8,7 @@
     </p>
     <div v-else>
       <AppSearch @searchlist="searchlist" />
-      <AppFilter :key="banks.length" :data="banks" @filterlist="filterlist" />
+      <AppFilter :key="items.length" :filterby="banks" @filterlist="filterlist" />
       <table v-if="itemsSelected" class="my-4">
         <tbody>
           <tr
@@ -76,23 +76,23 @@ export default {
     ...mapGetters('managers',
       ['items', 'banks']
     ),
+    // итоговые данные для вывода = пересечение массивов данных по фильтру и поиску
     itemsSelected () {
       return intersectionBy(this.items, this.itemsSearch, this.itemsFiltered, 'id') || this.items
     },
+    //  данные по фильтру
     itemsFiltered () {
-      return this.items.filter(item => this.filterdata.includes(item.bank.id)) || this.items
+      return this.filterdata.length ? this.items.filter(item => this.filterdata.includes(item.bank.id)) : this.items
     },
+    // данные по поиску
     itemsSearch () {
-      return this.items.filter(item => this.findby(item, ['email', 'phone', 'firstName', 'lastName', 'middleName'])) || this.items
+      return this.items.filter(item => this.findby(item, ['email', 'phone', 'firstName', 'lastName', 'middleName']))
     }
-  },
-  mounted () {
-    this.filterdata = this.items.map(item => item.bank.id)
   },
   methods: {
     refresh () {
       this.$fetch()
-      this.filterdata = this.items.map(item => item.bank.id)
+      this.filterdata = []
       this.searchdata = []
     },
     async remove (id) {
@@ -100,12 +100,15 @@ export default {
         await this.$store.dispatch('managers/remove', id)
       }
     },
+    // поиск в массиве данных по какому-либо из полей fields, которые соответствуют запросу (this.searchdata)
     findby (obj, fields) {
       return fields.some(item => obj[item].toLowerCase().includes(this.searchdata))
     },
+    // эмит из компонента AppFilter
     filterlist (data) {
       this.filterdata = data
     },
+    // эмит из компонента AppSearch
     searchlist (data) {
       this.searchdata = data
     }

@@ -8,40 +8,12 @@
         <ValidationObserver v-slot="{ invalid }">
           <form @submit.prevent="onSubmit">
             <AppInput
-              v-model="formData.email"
-              inputtype="email"
-              inputplaceholder="Email"
-              inputname="email"
-            />
-            <AppInput
-              v-model="formData.firstName"
-              inputplaceholder="Имя"
-              inputname="firstName"
-            />
-            <AppInput
-              v-model="formData.lastName"
-              inputplaceholder="Фамилия"
-              inputname="lastName"
-            />
-            <AppInput
-              v-model="formData.middleName"
-              inputplaceholder="Отчество"
-              inputname="middleName"
-            />
-            <AppInput
-              v-model="formData.phone"
-              inputplaceholder="Телефон"
-              inputname="phone"
-            />
-            <AppInput
-              v-model="formData.partner"
-              inputplaceholder="Партнер"
-              inputname="partner"
-            />
-            <AppInput
-              v-model="formData.bank"
-              inputplaceholder="Банк"
-              inputname="bank"
+              v-for="(data, index) in dataArr"
+              :key="data.id"
+              v-model="dataArr[index].model"
+              :inputtype="data.type"
+              :inputplaceholder="data.placeholder"
+              :inputname="data.name"
             />
             <div class="form-group mb-2">
               <button
@@ -68,15 +40,57 @@ export default {
   },
   data () {
     return {
-      formData: {
-        email: '',
-        firstName: 'test',
-        lastName: 'test',
-        middleName: 'test',
-        phone: 'test',
-        partner: '7',
-        bank: '10'
-      }
+      // данные для формы: id = ключ для объекта модели; model = значение
+      dataArr: [
+        {
+          model: '@email.com',
+          type: 'email',
+          placeholder: 'Email',
+          id: 'email'
+        },
+        {
+          model: 'test',
+          type: 'text',
+          placeholder: 'Имя',
+          id: 'firstName'
+        },
+        {
+          model: 'test',
+          type: 'text',
+          placeholder: 'Фамилия',
+          id: 'lastName'
+        },
+        {
+          model: 'test',
+          type: 'text',
+          placeholder: 'Отчество',
+          id: 'middleName'
+        },
+        {
+          model: 'test',
+          type: 'text',
+          placeholder: 'Телефон',
+          id: 'phone'
+        },
+        {
+          model: '7',
+          type: 'text',
+          placeholder: 'ID партнера',
+          id: 'partner'
+        },
+        {
+          model: '10',
+          type: 'text',
+          placeholder: 'ID банка',
+          id: 'bank'
+        }
+      ]
+    }
+  },
+  computed: {
+    formData () {
+      // из массива инпутов получаем объект с нужными полями для модели
+      return this.dataArr.reduce((obj, item) => ({ ...obj, [item.id]: item.model }), {})
     }
   },
   methods: {

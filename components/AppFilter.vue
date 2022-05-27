@@ -23,20 +23,22 @@
 <script>
 export default {
   props: {
-    data: {
+    filterby: {
       type: Array,
       default: null
     }
   },
   data () {
     return {
-      items: [],
+      data: this.filterby,
       selected: []
     }
   },
-  mounted () {
-    this.items = [...new Map(this.data.map(v => [v.id, v])).values()]
-    this.selected = this.items.map(i => i.id)
+  computed: {
+    items () {
+      // убираем дубликаты
+      return [...new Map(this.data.map(v => [v.id, v])).values()] || []
+    }
   },
 
   methods: {

@@ -21,7 +21,7 @@ export const actions = {
     commit
   }, id) {
     try {
-      const data = await this.$axios.get('https://api-broker.demo.ipotech.su/api/v1/bank/manager/list?page=1&limit=30')
+      const data = await this.$axios.get(`${process.env.api}/bank/manager/list?page=1&limit=30`)
       commit('setManagers', data.data.data)
     } catch (e) {
       dispatch('setMessage', {
@@ -37,17 +37,10 @@ export const actions = {
     commit
   }, payload) {
     try {
-      const response = await this.$axios.post('https://api-broker.demo.ipotech.su/api/v1/bank/manager', payload)
-      if (response.data) {
-        commit('addManager', response.data)
-      }
+      const response = await this.$axios.post(`${process.env.api}/bank/manager`, payload)
+      commit('addManager', response.data)
     } catch (e) {
-      dispatch('setMessage', {
-        value: `${e.response.data.code}: ${e.response.data.message}`,
-        type: 'error'
-      }, {
-        root: true
-      })
+      dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }
   },
   async remove ({
@@ -56,13 +49,8 @@ export const actions = {
     getters
   }, payload) {
     try {
-      await this.$axios.delete(`https://api-broker.demo.ipotech.su/api/v1/bank/manager/${payload}`).then((response) => {
-        dispatch('setMessage', {
-          value: `${getters.itembyid(payload).email} удален`,
-          type: 'warn'
-        }, {
-          root: true
-        })
+      await this.$axios.delete(`${process.env.api}/bank/manager/${payload}`).then((response) => {
+        dispatch('setMessage', { value: `${getters.itembyid(payload).email} удален`, type: 'warn' }, { root: true })
       })
       commit('removeManager', payload)
     } catch (e) {
