@@ -48,35 +48,9 @@ export default {
   ],
 
   plugins: [
-    '~/plugins/vee-validate'
+    '~/plugins/vee-validate',
+    '~/plugins/globals'
   ],
-
-  /* auth: {
-    strategies: {
-      oauth2: {
-        scheme: 'oauth2',
-        endpoints: {
-          authorization: 'https://api-broker.demo.ipotech.su/oauth2/token',
-          token: 'https://api-broker.demo.ipotech.su/oauth2/token'
-        },
-        token: {
-          property: 'access_token',
-          type: 'Bearer',
-          maxAge: 3600
-        },
-        refreshToken: {
-          property: 'refresh_token',
-          maxAge: 60 * 60 * 24 * 30
-        },
-        responseType: 'code',
-        client_id: 'c3ff36379fd0aff317297ed1d1b45b80',
-        client_secret: '7d094bf4175b0a95890b30a8c260597449b086aac70729444d72a4b2d11f3ee0ba05356ee4e63bd28f26f8f63ae40c685f6e0ae9512b38902c63e652b1c6621c',
-        grant_type: 'password',
-        scope: ['broker']
-      }
-    }
-  },  */
-
   auth: {
     strategies: {
       local: {
@@ -94,16 +68,13 @@ export default {
             method: 'post',
             propertyName: 'access_token'
           },
-          logout: {
-            url: '/api/auth/logout',
-            method: 'post'
-          },
           refresh: {
             url: '/api/auth/refresh',
             method: 'post',
             propertyName: 'access_token',
             scope: true
           },
+          logout: false,
           user: false
         },
         autoLogout: false,
@@ -118,9 +89,7 @@ export default {
   },
 
   env: {
-    api: 'https://api-broker.demo.ipotech.su/api/v1',
-    client_id: 'c3ff36379fd0aff317297ed1d1b45b80',
-    client_secret: '7d094bf4175b0a95890b30a8c260597449b086aac70729444d72a4b2d11f3ee0ba05356ee4e63bd28f26f8f63ae40c685f6e0ae9512b38902c63e652b1c6621c'
+    api: 'https://api-broker.demo.ipotech.su/api/v1'
   },
 
   axios: {

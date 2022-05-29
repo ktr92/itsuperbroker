@@ -11,8 +11,9 @@ export const mutations = {
 export const actions = {
   async fetch ({ dispatch, commit }, id) {
     try {
-      const data = await this.$axios.get('https://api-broker.demo.ipotech.su/api/v1/partner/broker/list?page=1&limit=10')
-      commit('setbrokers', data.data.data)
+      await this.$axios.get(`${process.env.api}/partner/broker/list?page=1&limit=10`).then((response) => {
+        commit('setbrokers', response.data.data)
+      })
     } catch (e) {
       dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }

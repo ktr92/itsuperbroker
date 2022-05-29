@@ -10,10 +10,4 @@ router.post('/login', ctr.login)
 // /api/auth/refresh
 router.post('/refresh', ctr.refresh)
 
-// /api/auth/user
-router.get('/user', ctr.user)
-
-// /api/auth/logout
-router.post('/logout', ctr.logout)
-
 module.exports = router

@@ -7,7 +7,6 @@
           class="opacity-0 w-0"
           :value="item.id"
           type="checkbox"
-          @change="change"
         >
         <span
           class="rounded border-2 px-2 border-gray-200 opacity-50 inline-block"
@@ -21,6 +20,9 @@
 </template>
 
 <script>
+import { uniqBy } from 'lodash'
+
+// компонент чекбокс-фильтра передает родителю массив из `id` выбранных значений
 export default {
   props: {
     filterby: {
@@ -36,13 +38,11 @@ export default {
   },
   computed: {
     items () {
-      // убираем дубликаты
-      return [...new Map(this.data.map(v => [v.id, v])).values()] || []
+      return uniqBy(this.data, 'id') // убираем дубликаты
     }
   },
-
-  methods: {
-    change () {
+  watch: {
+    selected () {
       this.$emit('filterlist', this.selected)
     }
   }

@@ -16,50 +16,33 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetch ({
-    dispatch,
-    commit
-  }, id) {
+  async fetch ({ dispatch, commit }, id) {
     try {
-      const data = await this.$axios.get(`${process.env.api}/bank/manager/list?page=1&limit=30`)
-      commit('setManagers', data.data.data)
-    } catch (e) {
-      dispatch('setMessage', {
-        value: `${e.response.data.code}: ${e.response.data.message}`,
-        type: 'error'
-      }, {
-        root: true
+      await this.$axios.get(`${process.env.api}/bank/manager/list?page=1&limit=30`).then((response) => {
+        commit('setManagers', response.data.data)
       })
-    }
-  },
-  async add ({
-    dispatch,
-    commit
-  }, payload) {
-    try {
-      const response = await this.$axios.post(`${process.env.api}/bank/manager`, payload)
-      commit('addManager', response.data)
     } catch (e) {
       dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }
   },
-  async remove ({
-    dispatch,
-    commit,
-    getters
-  }, payload) {
+  async add ({ dispatch, commit }, payload) {
+    try {
+      await this.$axios.post(`${process.env.api}/bank/manager`, payload).then((response) => {
+        dispatch('setMessage', { value: `${response.data.email} добавлен`, type: 'info' }, { root: true })
+        commit('addManager', response.data)
+      })
+    } catch (e) {
+      dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
+    }
+  },
+  async remove ({ dispatch, commit, getters }, payload) {
     try {
       await this.$axios.delete(`${process.env.api}/bank/manager/${payload}`).then((response) => {
-        dispatch('setMessage', { value: `${getters.itembyid(payload).email} удален`, type: 'warn' }, { root: true })
+        dispatch('setMessage', { value: `${getters.itemById(payload).email} удален`, type: 'warning' }, { root: true })
+        commit('removeManager', payload)
       })
-      commit('removeManager', payload)
     } catch (e) {
-      dispatch('setMessage', {
-        value: `${e.response.data.code}: ${e.response.data.message}`,
-        type: 'error'
-      }, {
-        root: true
-      })
+      dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }
   }
 }
@@ -67,5 +50,5 @@ export const actions = {
 export const getters = {
   items: state => state.managers,
   banks: state => state.managers.map(item => item.bank),
-  itembyid: state => id => state.managers.find(item => item.id === id)
+  itemById: state => id => state.managers.find(item => item.id === id)
 }

@@ -13,6 +13,7 @@
 </template>
 
 <script>
+// передает родителю введенную строку
 export default {
   data () {
     return {

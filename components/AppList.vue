@@ -96,7 +96,7 @@ export default {
       this.searchdata = []
     },
     async remove (id) {
-      if (confirm(`Удалить ${this.$store.getters['managers/itembyid'](id).email}?`)) {
+      if (confirm(`Удалить ${this.$store.getters['managers/itemById'](id).email}?`)) {
         await this.$store.dispatch('managers/remove', id)
       }
     },

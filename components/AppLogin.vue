@@ -28,7 +28,6 @@
             >
               Войти
             </button>
-            <div v-if="errormessage" class="text-red-600">{{ errormessage }}</div>
           </div>
         </form>
       </ValidationObserver>
@@ -52,15 +51,10 @@ export default {
       }
     }
   },
-  computed: {
-    errormessage () {
-      return this.errors
-    }
-  },
   methods: {
     async onSubmit () {
       try {
-        await this.$auth.loginWith('local', { data: { ...this.userdata, client_id: process.env.client_id, client_secret: process.env.client_secret } })
+        await this.$auth.loginWith('local', { data: { ...this.userdata } })
       } catch (e) {
         this.$store.dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
       }
