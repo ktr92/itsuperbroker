@@ -44,6 +44,9 @@ export default {
   watch: {
     selected () {
       this.$emit('filterlist', this.selected)
+    },
+    filterby () {
+      this.data = this.filterby
     }
   }
 }

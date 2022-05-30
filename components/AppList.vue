@@ -3,16 +3,12 @@
     <h1 class="my-4">
       Список кураторов
     </h1>
-    <p v-if="$fetchState.pending">
-      Загрузка данных...
-    </p>
-    <div v-else>
-      <AppSearch @searchlist="searchlist" />
-      <AppFilter :key="items.length" :filterby="banks" @filterlist="filterlist" />
-      <table v-if="itemsSelected" class="my-4">
+    <div v-if="items">
+      <AppFilterGroup :filtered="items" @filter="filter" />
+      <table v-if="itemsfilter" class="my-4">
         <tbody>
           <tr
-            v-for="item in itemsSelected"
+            v-for="item in itemsfilter"
             :key="item.id"
             class="p-4 text-sm"
           >
@@ -48,69 +44,41 @@
           </tr>
         </tbody>
       </table>
-      <button
-        class="bg-green-500 rounded text-white px-8 py-2"
-        @click="refresh"
-      >
-        Обновить
-      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { intersectionBy } from 'lodash'
-
+// компонент для вывода данных
 export default {
+  props: {
+    list: {
+      type: Array,
+      default: () => {}
+    }
+  },
   data () {
     return {
+      items: this.list,
+      itemsfilter: this.list,
       filterdata: [],
       searchdata: []
     }
   },
-  async fetch () {
-    await this.$store.dispatch('managers/fetch')
-  },
-  computed: {
-    ...mapGetters('managers',
-      ['items', 'banks']
-    ),
-    // итоговые данные для вывода = пересечение массивов данных по фильтру и поиску
-    itemsSelected () {
-      return intersectionBy(this.items, this.itemsSearch, this.itemsFiltered, 'id') || this.items
-    },
-    //  данные по фильтру
-    itemsFiltered () {
-      return this.filterdata.length ? this.items.filter(item => this.filterdata.includes(item.bank.id)) : this.items
-    },
-    // данные по поиску
-    itemsSearch () {
-      return this.items.filter(item => this.findby(item, ['email', 'phone', 'firstName', 'lastName', 'middleName']))
+  watch: {
+    list () {
+      this.itemsfilter = this.list
+      this.items = this.list
     }
   },
   methods: {
-    refresh () {
-      this.$fetch()
-      this.filterdata = []
-      this.searchdata = []
-    },
     async remove (id) {
       if (confirm(`Удалить ${this.$store.getters['managers/itemById'](id).email}?`)) {
         await this.$store.dispatch('managers/remove', id)
       }
     },
-    // поиск в массиве данных по какому-либо из полей fields, которые соответствуют запросу (this.searchdata)
-    findby (obj, fields) {
-      return fields.some(item => obj[item].toLowerCase().includes(this.searchdata))
-    },
-    // эмит из компонента AppFilter
-    filterlist (data) {
-      this.filterdata = data
-    },
-    // эмит из компонента AppSearch
-    searchlist (data) {
-      this.searchdata = data
+    filter (data) {
+      this.itemsfilter = data
     }
   }
 }

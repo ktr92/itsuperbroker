@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container columns-2 py-4 px-2">
-      <AppList />
+      <AppList :list="items" />
       <AppAddform />
     </div>
     <div class="container columns-2 py-4 px-2">
@@ -11,9 +11,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   layout: 'MainLayout',
-  middleware: 'auth'
+  middleware: 'auth',
+  async asyncData ({ store }) {
+    await store.dispatch('managers/fetch')
+  },
+  computed: {
+    ...mapGetters('managers',
+      ['items']
+    )
+  }
 }
 </script>
 
