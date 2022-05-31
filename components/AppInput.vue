@@ -7,7 +7,7 @@
         :type="inputtype"
         :placeholder="inputplaceholder"
         :name="inputname"
-        class="rounded border border-rose-600 px-4 py-2 w-full"
+        class="input"
         autocomplete="off"
         @change="handleInput"
         @input="handleInput"

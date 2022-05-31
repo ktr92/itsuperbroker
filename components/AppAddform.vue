@@ -18,7 +18,6 @@
             <div class="form-group mb-2">
               <button
                 type="submit"
-                class="bg-green-500 rounded text-white px-8 py-2 font-bold"
                 :disabled="invalid"
               >
                 Создать

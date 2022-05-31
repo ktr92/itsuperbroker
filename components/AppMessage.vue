@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="message"
-    class="my-2 fixed container bottom-2 left-0 right-0 m-auto bg-red-100 rounded-lg z-50 border-2 border-red-500 text-red-600"
+    class="appmessage"
     :class="{'text-red-600 border-red-500 bg-red-100': typeError, 'text-green-600 border-green-500 bg-green-100': typeInfo, 'text-yellow-600 border-yellow-500 bg-yellow-100': typeWarning }"
   >
     <p class="py-2 px-4 font-bold text-md">

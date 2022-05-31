@@ -1,0 +1,18 @@
+@tailwind components;
+@layer components {
+  th, td{
+    @apply px-2 py-4 text-left border-b-2
+  }
+  .btn_red {
+    @apply bg-red-400 rounded text-white px-4
+  }
+  button[type="submit"], .btn_green {
+    @apply bg-green-500 rounded text-white px-8 py-2 font-bold
+  }
+  .input {
+    @apply rounded border px-4 py-2 w-full
+  }
+  .appmessage {
+    @apply my-2 fixed container bottom-2 left-0 right-0 m-auto bg-red-100 rounded-lg z-50 border-2 border-red-500 text-red-600
+  }
+}

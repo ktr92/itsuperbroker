@@ -27,7 +27,7 @@
         </tbody>
       </table>
       <button
-        class="bg-green-500 rounded text-white px-8 py-2"
+        class="btn_green"
         @click="getItems"
       >
         Обновить список брокеров
