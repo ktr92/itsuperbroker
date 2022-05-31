@@ -1,5 +1,14 @@
 <template>
-  <div>
+  <div v-if="data">
+    <div class="inline-block mb-2 mr-2">
+      <label class="cursor-pointer" @click="reset">
+        <span
+          class="rounded border-2 px-2 border-green-500 opacity-100 inline-block"
+        >
+          Сбросить
+        </span>
+      </label>
+    </div>
     <div v-for="item in items" :key="item.id" class="inline-block mb-2 mr-2">
       <label class="cursor-pointer">
         <input
@@ -47,6 +56,11 @@ export default {
     },
     filterby () {
       this.data = this.filterby
+    }
+  },
+  methods: {
+    reset () {
+      this.selected = []
     }
   }
 }
