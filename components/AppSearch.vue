@@ -6,8 +6,8 @@
         class="border border-gray-300 p-2 text-sm mb-4 rounded"
         type="text"
         placeholder="Поиск по контактам"
-        @input="change"
       >
+      <button class="text-2xl align-top text-red-600" @click="reset">&times;</button>
     </label>
   </div>
 </template>
@@ -17,12 +17,17 @@
 export default {
   data () {
     return {
-      request: null
+      request: ''
+    }
+  },
+  watch: {
+    request () {
+      this.$emit('searchlist', this.request.trim().toLowerCase())
     }
   },
   methods: {
-    change () {
-      this.$emit('searchlist', this.request.trim().toLowerCase())
+    reset () {
+      this.request = ''
     }
   }
 }
