@@ -50,7 +50,7 @@
               </td>
               <td v-if="item.id">
                 <button
-                  class="btn_red"
+                  class="redbutton"
                   @click="remove(item.id)"
                 >
                   Удалить

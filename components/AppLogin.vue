@@ -23,7 +23,6 @@
           <div class="form-group mb-2">
             <button
               type="submit"
-              class="cursor-pointer rounded text-white font-bold px-4 py-2 w-full uppercase bg-green-500 hover:bg-green-600 transition duration-150 ease-in-out"
               :disabled="invalid"
             >
               Войти

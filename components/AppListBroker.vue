@@ -14,20 +14,20 @@
             :key="item.id"
             class="p-4"
           >
-            <td class="p-2 border-b-2">
+            <td>
               <b>ID</b>: {{ item.id }}
             </td>
-            <td class="p-2 border-b-2">
+            <td>
               <b>email</b>: {{ item.email }}
             </td>
-            <td class="p-2 border-b-2">
+            <td>
               <b>Username</b>: {{ item.username }}
             </td>
           </tr>
         </tbody>
       </table>
       <button
-        class="btn_green"
+        class="button"
         @click="getItems"
       >
         Обновить список брокеров

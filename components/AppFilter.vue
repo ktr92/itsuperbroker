@@ -1,25 +1,23 @@
 <template>
   <div v-if="data">
     <div class="inline-block mb-2 mr-2">
-      <label class="cursor-pointer" @click="reset">
+      <label class="checkbox" @click="reset">
         <span
-          class="rounded border-2 px-2 border-green-500 opacity-100 inline-block"
+          class="reset"
         >
           Сбросить
         </span>
       </label>
     </div>
     <div v-for="item in items" :key="item.id" class="inline-block mb-2 mr-2">
-      <label class="cursor-pointer">
+      <label class="checkbox">
         <input
           v-model="selected"
-          class="opacity-0 w-0"
           :value="item.id"
           type="checkbox"
         >
         <span
-          class="rounded border-2 px-2 border-gray-200 opacity-50 inline-block"
-          :class="{'bg-green-500 border-green-500 text-white opacity-100': selected.includes(item.id)}"
+          :class="{'selected': selected.includes(item.id)}"
         >
           {{ item.name }}
         </span>
@@ -36,6 +34,7 @@ export default {
   props: {
     filterby: {
       type: Array,
+      require: true,
       default: null
     }
   },

@@ -3,7 +3,7 @@
     <label>
       <input
         v-model="request"
-        class="border border-gray-300 p-2 text-sm mb-4 rounded"
+        class="input"
         type="text"
         placeholder="Поиск по контактам"
       >

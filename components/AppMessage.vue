@@ -2,7 +2,7 @@
   <div
     v-if="message"
     class="appmessage"
-    :class="{'text-red-600 border-red-500 bg-red-100': typeError, 'text-green-600 border-green-500 bg-green-100': typeInfo, 'text-yellow-600 border-yellow-500 bg-yellow-100': typeWarning }"
+    :class="{'appmessage_error': typeError, 'appmessage_default': typeInfo, 'appmessage_warn': typeWarning }"
   >
     <p class="py-2 px-4 font-bold text-md">
       {{ message.value }}
