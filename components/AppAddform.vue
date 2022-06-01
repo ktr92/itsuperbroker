@@ -32,7 +32,7 @@
 
 <script>
 import { ValidationObserver } from 'vee-validate'
-
+import { helperSetmodel } from '../utils/helpers'
 export default {
   components: {
     ValidationObserver
@@ -89,7 +89,7 @@ export default {
   computed: {
     formData () {
       // из массива инпутов получаем объект с нужными полями для модели
-      return this.dataArr.reduce((obj, item) => ({ ...obj, [item.id]: item.model }), {})
+      return helperSetmodel(this.dataArr, 'id', 'model')
     }
   },
   methods: {

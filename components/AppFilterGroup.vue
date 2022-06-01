@@ -1,12 +1,13 @@
 <template>
   <div>
     <AppSearch @searchlist="searchlist" />
-    <AppFilter :key="items.length" :filterby="banks" @filterlist="filterlist" />
+    <AppFilter :filterby="banks" @filterlist="filterlist" />
   </div>
 </template>
 
 <script>
 import { intersectionBy } from 'lodash'
+import { helperFindby } from '../utils/helpers'
 // компонент для фильтрации данных
 export default {
   props: {
@@ -30,13 +31,13 @@ export default {
     itemsSelected () {
       return intersectionBy(this.items, this.itemsSearch, this.itemsFiltered, 'id') || this.items
     },
-    //  данные по чекбокс фильтру
+    // фильтр данных по чекбокс фильтру
     itemsFiltered () {
       return this.filterdata.length ? this.items.filter(item => this.filterdata.includes(item.bank.id)) : this.items
     },
-    // данные по поиску
+    // фильтр данных по поиску
     itemsSearch () {
-      return this.items.filter(item => this.findby(item, ['email', 'phone', 'firstName', 'lastName', 'middleName'])) || this.items
+      return this.items.filter(item => helperFindby(item, ['email', 'phone', 'firstName', 'lastName', 'middleName'], this.searchdata)) || this.items
     }
   },
   watch: {
@@ -48,10 +49,6 @@ export default {
     }
   },
   methods: {
-    // поиск в массиве данных по какому-либо из полей fields, которые соответствуют запросу (this.searchdata)
-    findby (obj, fields) {
-      return fields.some(item => obj[item].toLowerCase().includes(this.searchdata))
-    },
     // эмит из компонента AppFilter
     filterlist (data) {
       this.filterdata = data

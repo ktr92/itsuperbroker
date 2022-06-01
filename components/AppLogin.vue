@@ -3,8 +3,11 @@
     <div class="mb-8 text-center text-2xl">
       <h1>Авторизация</h1>
     </div>
-    <div v-if="$auth.loggedIn" class="text-green-500 text-center">
-      Вы авторизованы!
+    <div v-if="$auth.loggedIn" class="text-center">
+      <p>Вы авторизованы!</p>
+      <nuxt-link to="/" class="text-green-500">
+        Перейти на главную
+      </nuxt-link>
     </div>
     <div v-else>
       <ValidationObserver v-slot="{ invalid }">
