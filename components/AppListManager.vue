@@ -22,12 +22,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr
+            <template
               v-for="item in itemsfilter"
-              :key="item.id"
               class="p-4 text-sm"
             >
-              <td v-if="item.firstName">
+              <slot name="item" :item="item" />
+              <!-- <td v-if="item.firstName">
                 {{ item.firstName }}
               </td>
               <td v-if="item.lastName">
@@ -55,8 +55,8 @@
                 >
                   Удалить
                 </button>
-              </td>
-            </tr>
+              </td> -->
+            </template>
           </tbody>
         </table>
       </div>

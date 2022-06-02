@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="container columns-2 py-4 px-2">
-      <AppListManager :list="items" />
+      <AppListManager :list="items">
+        <template #item="slotProps">
+          <AppManager :item="slotProps.item" />
+        </template>
+      </AppListManager>
       <AppAddform />
     </div>
     <div class="container columns-2 py-4 px-2">
