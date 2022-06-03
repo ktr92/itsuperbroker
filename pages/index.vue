@@ -1,16 +1,32 @@
 <template>
   <div>
     <div class="container columns-2 py-4 px-2">
-      <AppListManager :list="items">
+      <AppList :list="managers" :headerlist="managerHeaders">
+        <template #title>
+          Список кураторов
+        </template>
+        <template #header="slotProps">
+          <AppTableHeader :headers="slotProps.headers" />
+        </template>
         <template #item="slotProps">
           <AppManager :item="slotProps.item" />
         </template>
-      </AppListManager>
+      </AppList>
       <AppAddform />
     </div>
-    <div class="container columns-2 py-4 px-2">
-      <AppListBroker />
-    </div>
+    <!-- <div class="container columns-2 py-4 px-2">
+      <AppList :list="brokers" :headers="brokerHeaders">
+        <template #title>
+          Список брокеров
+        </template>
+        <template #header="slotProps">
+          <AppTableHeader :headers="slotProps" />
+        </template>
+        <template #item="slotProps">
+          <AppBroker :item="slotProps.item" />
+        </template>
+      </AppList>
+    </div> -->
   </div>
 </template>
 
@@ -24,7 +40,7 @@ export default {
   },
   computed: {
     ...mapGetters('managers',
-      ['items']
+      ['managers', 'managerHeaders']
     )
   }
 }

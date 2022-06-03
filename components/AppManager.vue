@@ -1,7 +1,30 @@
 <template>
   <tr class="p-4 text-sm">
-    <td v-for="prop in dataitem" :key="prop">
-      {{ prop }}
+    <td>
+      {{ dataitem.firstName }}
+    </td>
+    <td>
+      {{ dataitem.lastName }}
+    </td>
+    <td>
+      {{ dataitem.middleName }}
+    </td>
+    <td>
+      {{ dataitem.email }}
+    </td>
+    <td>
+      {{ dataitem.phone }}
+    </td>
+    <td>
+      {{ dataitem.bank.name }}
+    </td>
+    <td>
+      <button
+        class="redbutton"
+        @click="remove(dataitem.id)"
+      >
+        Удалить
+      </button>
     </td>
   </tr>
 </template>
@@ -17,6 +40,13 @@ export default {
   data () {
     return {
       dataitem: this.item
+    }
+  },
+  methods: {
+    async remove (id) {
+      if (confirm(`Удалить ${this.$store.getters['managers/managerById'](id).email}?`)) {
+        await this.$store.dispatch('managers/remove', id)
+      }
     }
   }
 }

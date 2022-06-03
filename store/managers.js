@@ -1,6 +1,7 @@
 
 export const state = () => ({
-  managers: []
+  managers: [],
+  headers: ['Имя', 'Фамилия', 'Отчество', 'Email', 'Телефон', 'Банк']
 })
 
 export const mutations = {
@@ -38,7 +39,7 @@ export const actions = {
   async remove ({ dispatch, commit, getters }, payload) {
     try {
       await this.$axios.delete(`${process.env.api}/bank/manager/${payload}`).then((response) => {
-        dispatch('setMessage', { value: `${getters.itemById(payload).email} удален`, type: 'warning' }, { root: true })
+        dispatch('setMessage', { value: `${getters.managerById(payload).email} удален`, type: 'warning' }, { root: true })
         commit('removeManager', payload)
       })
     } catch (e) {
@@ -48,7 +49,8 @@ export const actions = {
 }
 
 export const getters = {
-  items: state => state.managers,
+  managers: state => state.managers,
   banks: state => state.managers.map(item => item.bank),
-  itemById: state => id => state.managers.find(item => item.id === id)
+  managerById: state => id => state.managers.find(item => item.id === id),
+  managerHeaders: state => state.headers
 }
