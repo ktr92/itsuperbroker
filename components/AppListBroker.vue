@@ -37,6 +37,7 @@
 </template>
 
 <script>
+// компонент для вывода данных по брокерам (на данный момент не работает)
 export default {
   async fetch () {
     await this.$store.dispatch('brokers/fetch')

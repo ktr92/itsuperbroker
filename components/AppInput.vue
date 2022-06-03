@@ -18,6 +18,7 @@
 </template>
 
 <script>
+// компонент для инпутов с валидацией
 import { ValidationProvider } from 'vee-validate'
 export default {
   $_veeValidate: {

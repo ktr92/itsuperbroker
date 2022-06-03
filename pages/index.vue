@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container columns-2 py-4 px-2">
-      <AppList :list="managers" :headerlist="managerHeaders">
+      <AppList :list="managers" :headerlist="managerHeaders" filterby="bank" :searchby="['email', 'phone', 'firstName', 'lastName', 'middleName']">
         <template #title>
           Список кураторов
         </template>

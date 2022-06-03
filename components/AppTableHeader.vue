@@ -9,6 +9,7 @@
 </template>
 
 <script>
+// компонент для вывода заголовков таблицы
 export default {
   props: {
     headers: {

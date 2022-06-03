@@ -1,7 +1,7 @@
 <template>
   <div>
-    <AppSearch @searchlist="searchlist" />
-    <AppFilter :filterby="banks" @filterlist="filterlist" />
+    <LazyAppSearch v-if="search" @searchlist="searchlist" />
+    <LazyAppFilter v-if="filter" :filterby="filterprop" @filterlist="filterlist" />
   </div>
 </template>
 
@@ -14,18 +14,28 @@ export default {
     filtered: {
       type: Array,
       default: null
+    },
+    filterby: {
+      type: String,
+      default: null
+    },
+    searchby: {
+      type: Array,
+      default: null
     }
   },
   data () {
     return {
+      search: this.searchby,
+      filter: this.filterby,
       items: this.filtered,
       filterdata: [],
       searchdata: []
     }
   },
   computed: {
-    banks () {
-      return this.items.map(item => item.bank)
+    filterprop () {
+      return this.items.map(item => item[this.filter])
     },
     // итоговые данные для вывода = пересечение массивов данных по фильтру и поиску
     itemsSelected () {
@@ -37,7 +47,7 @@ export default {
     },
     // фильтр данных по поиску
     itemsSearch () {
-      return this.items.filter(item => helperFindby(item, ['email', 'phone', 'firstName', 'lastName', 'middleName'], this.searchdata)) || this.items
+      return this.search ? this.items.filter(item => helperFindby(item, this.search, this.searchdata)) : this.items
     }
   },
   watch: {

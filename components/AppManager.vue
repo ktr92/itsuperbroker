@@ -30,6 +30,7 @@
 </template>
 
 <script>
+// компонент для вывода данных по куратору
 export default {
   props: {
     item: {

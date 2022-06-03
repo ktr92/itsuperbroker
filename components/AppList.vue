@@ -5,7 +5,7 @@
         <slot name="title" />
       </h1>
       <div>
-        <LazyAppFilterGroup v-if="items.length" :filtered="items" @filter="filter" />
+        <LazyAppFilterGroup v-if="items.length" :filtered="items" :filterby="filterprop" :searchby="searchprop" @filter="filter" />
         <table
           v-if="itemsfilter.length"
           class="my-4"
@@ -36,10 +36,20 @@ export default {
     headerlist: {
       type: Array,
       required: true
+    },
+    filterby: {
+      type: String,
+      default: null
+    },
+    searchby: {
+      type: Array,
+      default: null
     }
   },
   data () {
     return {
+      searchprop: this.searchby,
+      filterprop: this.filterby,
       headers: this.headerlist,
       items: this.list,
       itemsfilter: this.list,
