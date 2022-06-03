@@ -5,11 +5,8 @@
         <template #title>
           Список кураторов
         </template>
-        <template #header="slotProps">
-          <ListHeaders :headers="slotProps.headers" />
-        </template>
-        <template #item="slotProps">
-          <ModuleManager :item="slotProps.item" />
+        <template #items="slotProps">
+          <ModuleManager :items="slotProps.items" :headerlist="slotProps.headers" />
         </template>
       </ListItems>
       <FormAddItem />

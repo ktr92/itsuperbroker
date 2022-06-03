@@ -7,7 +7,7 @@
 
 <script>
 import { intersectionBy } from 'lodash'
-import { helperFindby } from '../../../utils/helpers'
+import { helperFindby } from '@/utils/helpers'
 // компонент для фильтрации данных
 export default {
   props: {

@@ -1,46 +1,71 @@
 <template>
-  <tr class="p-4 text-sm">
-    <td>
-      {{ dataitem.firstName }}
-    </td>
-    <td>
-      {{ dataitem.lastName }}
-    </td>
-    <td>
-      {{ dataitem.middleName }}
-    </td>
-    <td>
-      {{ dataitem.email }}
-    </td>
-    <td>
-      {{ dataitem.phone }}
-    </td>
-    <td>
-      {{ dataitem.bank.name }}
-    </td>
-    <td>
-      <button
-        class="redbutton"
-        @click="remove(dataitem.id)"
+  <table>
+    <thead>
+      <tr>
+        <th v-for="item in dataheader" :key="item">
+          {{ item }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        v-for="item in dataitems"
+        :key="item"
+        class="p-4 text-sm"
       >
-        Удалить
-      </button>
-    </td>
-  </tr>
+        <td>
+          {{ item.firstName }}
+        </td>
+        <td>
+          {{ item.lastName }}
+        </td>
+        <td>
+          {{ item.middleName }}
+        </td>
+        <td>
+          {{ item.email }}
+        </td>
+        <td>
+          {{ item.phone }}
+        </td>
+        <td>
+          {{ item.bank.name }}
+        </td>
+        <td>
+          <button
+            class="redbutton"
+            @click="remove(item.id)"
+          >
+            Удалить
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
 // компонент для вывода данных по куратору
 export default {
   props: {
-    item: {
-      type: Object,
+    items: {
+      type: Array,
+      required: true
+    },
+    headerlist: {
+      type: Array,
       required: true
     }
   },
   data () {
     return {
-      dataitem: this.item
+      dataitems: this.items,
+      dataheader: this.headerlist
+    }
+  },
+  watch: {
+    items () {
+      this.dataitems = this.items
     }
   },
   methods: {

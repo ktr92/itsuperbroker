@@ -32,7 +32,7 @@
 
 <script>
 import { ValidationObserver } from 'vee-validate'
-import { helperSetmodel } from '../../utils/helpers'
+import { helperSetmodel } from '@/utils/helpers'
 export default {
   components: {
     ValidationObserver

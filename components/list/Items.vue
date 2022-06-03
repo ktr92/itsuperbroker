@@ -6,20 +6,12 @@
       </h1>
       <div>
         <LazyListFilterGroup v-if="items.length" :filtered="items" :filterby="filterprop" :searchby="searchprop" @filter="filter" />
-        <table
+        <template
           v-if="itemsfilter.length"
           class="my-4"
         >
-          <slot name="header" :headers="headers" />
-          <tbody>
-            <template
-              v-for="item in itemsfilter"
-              class="p-4 text-sm"
-            >
-              <slot name="item" :item="item" />
-            </template>
-          </tbody>
-        </table>
+          <slot name="items" :items="itemsfilter" :headers="headers" />
+        </template>
       </div>
     </div>
   </div>
