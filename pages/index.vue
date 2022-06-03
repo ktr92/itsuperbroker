@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="container columns-2 py-4 px-2">
-      <AppList :list="managers" :headerlist="managerHeaders" filterby="bank" :searchby="['email', 'phone', 'firstName', 'lastName', 'middleName']">
+      <ListItems :list="managers" :headerlist="managerHeaders" filterby="bank" :searchby="['email', 'phone', 'firstName', 'lastName', 'middleName']">
         <template #title>
           Список кураторов
         </template>
         <template #header="slotProps">
-          <AppTableHeader :headers="slotProps.headers" />
+          <ListHeaders :headers="slotProps.headers" />
         </template>
         <template #item="slotProps">
-          <AppManager :item="slotProps.item" />
+          <ModuleManager :item="slotProps.item" />
         </template>
-      </AppList>
-      <AppAddform />
+      </ListItems>
+      <FormAddItem />
     </div>
     <!-- <div class="container columns-2 py-4 px-2">
       <AppList :list="brokers" :headers="brokerHeaders">

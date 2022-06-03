@@ -7,7 +7,7 @@
       <div>
         <ValidationObserver v-slot="{ invalid }">
           <form @submit.prevent="onSubmit">
-            <AppInput
+            <UiInput
               v-for="(data, index) in dataArr"
               :key="data.id"
               v-model="dataArr[index].model"
@@ -32,7 +32,7 @@
 
 <script>
 import { ValidationObserver } from 'vee-validate'
-import { helperSetmodel } from '../utils/helpers'
+import { helperSetmodel } from '../../utils/helpers'
 export default {
   components: {
     ValidationObserver

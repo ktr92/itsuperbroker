@@ -1,13 +1,13 @@
 <template>
   <div>
-    <LazyAppSearch v-if="search" @searchlist="searchlist" />
-    <LazyAppFilter v-if="filter" :filterby="filterprop" @filterlist="filterlist" />
+    <LazyListFilterSearch v-if="search" @searchlist="searchlist" />
+    <LazyListFilterCheckbox v-if="filter" :filterby="filterprop" @filterlist="filterlist" />
   </div>
 </template>
 
 <script>
 import { intersectionBy } from 'lodash'
-import { helperFindby } from '../utils/helpers'
+import { helperFindby } from '../../../utils/helpers'
 // компонент для фильтрации данных
 export default {
   props: {

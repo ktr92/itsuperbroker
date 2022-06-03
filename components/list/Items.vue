@@ -5,7 +5,7 @@
         <slot name="title" />
       </h1>
       <div>
-        <LazyAppFilterGroup v-if="items.length" :filtered="items" :filterby="filterprop" :searchby="searchprop" @filter="filter" />
+        <LazyListFilterGroup v-if="items.length" :filtered="items" :filterby="filterprop" :searchby="searchprop" @filter="filter" />
         <table
           v-if="itemsfilter.length"
           class="my-4"

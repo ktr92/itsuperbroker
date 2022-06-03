@@ -12,12 +12,12 @@
     <div v-else>
       <ValidationObserver v-slot="{ invalid }">
         <form @submit.prevent="onSubmit">
-          <AppInput
+          <UiInput
             v-model="userdata.username"
             inputplaceholder="Логин"
             inputname="login"
           />
-          <AppInput
+          <UiInput
             v-model="userdata.password"
             inputtype="password"
             inputplaceholder="Пароль"
