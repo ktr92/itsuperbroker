@@ -1,6 +1,6 @@
 <template>
   <table>
-    <thead>
+    <thead v-if="dataheader.length">
       <tr>
         <th v-for="item in dataheader" :key="item">
           {{ item }}
@@ -36,7 +36,7 @@
             class="redbutton"
             @click="remove(item.id)"
           >
-            Удалить
+            &times;
           </button>
         </td>
       </tr>
@@ -45,24 +45,23 @@
 </template>
 
 <script>
+
 // компонент для вывода данных по куратору
 export default {
   props: {
     items: {
       type: Array,
       required: true
-    },
-    headerlist: {
-      type: Array,
-      required: true
     }
   },
+
   data () {
     return {
       dataitems: this.items,
-      dataheader: this.headerlist
+      dataheader: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Банк', 'Удалить']
     }
   },
+
   watch: {
     items () {
       this.dataitems = this.items

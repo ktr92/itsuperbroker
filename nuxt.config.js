@@ -29,7 +29,7 @@ export default {
     }]
   },
 
-  css: ['~/assets/css/twstyles.css'],
+  css: ['~/assets/css/twstyles.css', '~/assets/css/global.css'],
 
   components: true,
 

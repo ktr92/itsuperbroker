@@ -10,7 +10,7 @@
           v-if="itemsfilter.length"
           class="my-4"
         >
-          <slot name="items" :items="itemsfilter" :headers="headers" />
+          <slot name="items" :items="itemsfilter" />
         </template>
       </div>
     </div>
@@ -18,14 +18,10 @@
 </template>
 
 <script>
-// компонент для вывода таблицы данных
+// компонент для вывода фильтрованных данных
 export default {
   props: {
     list: {
-      type: Array,
-      required: true
-    },
-    headerlist: {
       type: Array,
       required: true
     },
@@ -42,7 +38,6 @@ export default {
     return {
       searchprop: this.searchby,
       filterprop: this.filterby,
-      headers: this.headerlist,
       items: this.list,
       itemsfilter: this.list,
       filterdata: [],
