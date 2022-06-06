@@ -45,35 +45,10 @@
 </template>
 
 <script>
-
+import moduleview from '@/mixins/module-view'
 // компонент для вывода данных по куратору
 export default {
-  props: {
-    items: {
-      type: Array,
-      required: true
-    }
-  },
-
-  data () {
-    return {
-      dataitems: this.items,
-      dataheader: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Банк', 'Удалить']
-    }
-  },
-
-  watch: {
-    items () {
-      this.dataitems = this.items
-    }
-  },
-  methods: {
-    async remove (id) {
-      if (confirm(`Удалить ${this.$store.getters['managers/managerById'](id).email}?`)) {
-        await this.$store.dispatch('managers/remove', id)
-      }
-    }
-  }
+  mixins: [moduleview]
 }
 </script>
 

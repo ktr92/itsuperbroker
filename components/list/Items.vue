@@ -18,43 +18,11 @@
 </template>
 
 <script>
+import listitems from '@/mixins/list-items'
+
 // компонент для вывода фильтрованных данных
 export default {
-  props: {
-    list: {
-      type: Array,
-      required: true
-    },
-    filterby: {
-      type: String,
-      default: null
-    },
-    searchby: {
-      type: Array,
-      default: null
-    }
-  },
-  data () {
-    return {
-      searchprop: this.searchby,
-      filterprop: this.filterby,
-      items: this.list,
-      itemsfilter: this.list,
-      filterdata: [],
-      searchdata: []
-    }
-  },
-  watch: {
-    list () {
-      this.itemsfilter = this.list
-      this.items = this.list
-    }
-  },
-  methods: {
-    filter (data) {
-      this.itemsfilter = data
-    }
-  }
+  mixins: [listitems]
 }
 </script>
 
