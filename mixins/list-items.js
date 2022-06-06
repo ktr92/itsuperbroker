@@ -11,10 +11,6 @@ export default {
     searchby: {
       type: Array,
       default: null
-    },
-    headers: {
-      type: Array,
-      default: null
     }
   },
   data () {

@@ -10,7 +10,7 @@
     <tbody>
       <tr
         v-for="item in dataitems"
-        :key="item"
+        :key="item.id"
         class="p-4 text-sm"
       >
         <td>
@@ -46,7 +46,7 @@
 
 <script>
 import moduleview from '@/mixins/module-view'
-// компонент для вывода данных по куратору
+// компонент для вывода данных по куратору (вид таблицы)
 export default {
   mixins: [moduleview]
 }

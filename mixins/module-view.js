@@ -5,6 +5,10 @@ export default {
       type: Array,
       required: true
     },
+    headers: {
+      type: Array,
+      required: true
+    },
     namespace: {
       type: String,
       required: true

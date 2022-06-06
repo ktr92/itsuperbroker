@@ -22,8 +22,8 @@ export default {
     return {
       NAMESPACE,
       searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],
-      headers: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Банк', 'Удалить'].length,
-      filterby: 'banks'
+      headers: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Банк', 'Удалить'],
+      filterby: 'bank'
     }
   },
   async fetch () {
