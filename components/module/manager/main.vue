@@ -1,6 +1,6 @@
 <template>
   <div class="container columns-2 py-4 px-2">
-    <ListItems :list="managers" :filterby="filterby" :searchby="searchby">
+    <ListItems :list="getItems" :filterby="filterby" :searchby="searchby">
       <template #title>
         Список кураторов
       </template>
@@ -8,7 +8,7 @@
         <ModuleManagerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
       </template>
     </ListItems>
-    <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="CREATE">
+    <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="ACTION_CREATE">
       <template #header>
         Создание куратора
       </template>
@@ -18,14 +18,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { FETCH, CREATE } from '@/store/action-types'
+import { ACTION_FETCH, ACTION_CREATE } from '@/store/action-types'
+import { GETTER_GETALL } from '@/store/getter-types'
 const NAMESPACE = 'managers'
 
 export default {
   data () {
     return {
       NAMESPACE,
-      CREATE,
+      ACTION_CREATE,
       searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],
       headers: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Банк', 'Удалить'],
       filterby: 'bank',
@@ -76,11 +77,11 @@ export default {
     }
   },
   async fetch () {
-    await this.$store.dispatch(`${NAMESPACE}/${FETCH}`)
+    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`)
   },
   computed: {
     ...mapGetters(`${NAMESPACE}`,
-      ['managers']
+      [GETTER_GETALL]
     )
   }
 }

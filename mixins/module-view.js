@@ -1,4 +1,5 @@
-import { REMOVE } from '@/store/action-types'
+import { ACTION_REMOVE } from '@/store/action-types'
+import { GETTER_GETONE } from '@/store/getter-types'
 export default {
   props: {
     items: {
@@ -29,8 +30,8 @@ export default {
   },
   methods: {
     async remove (id) {
-      if (confirm(`Удалить ${this.$store.getters['managers/managerById'](id).email}?`)) {
-        await this.$store.dispatch(`${this.namespace}/${REMOVE}`, id)
+      if (confirm(`Удалить ${this.$store.getters[`${this.namespace}/${GETTER_GETONE}`](id).email}?`)) {
+        await this.$store.dispatch(`${this.namespace}/${ACTION_REMOVE}`, id)
       }
     }
   }

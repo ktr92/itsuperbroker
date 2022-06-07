@@ -1,30 +1,32 @@
-import { FETCH, CREATE, REMOVE } from '@/store/action-types'
+import { GETTER_GETONE } from '@/store/getter-types'
+import { ACTION_FETCH, ACTION_CREATE, ACTION_REMOVE } from '@/store/action-types'
+import { MUTATION_SET, MUTATION_ADD, MUTATION_REMOVE } from '@/store/mutation-types'
 
 export default {
-  async [FETCH] ({ dispatch, commit }, id) {
+  async [ACTION_FETCH] ({ dispatch, commit }) {
     try {
       await this.$axios.get(`${process.env.api}/bank/manager/list?page=1&limit=30`).then((response) => {
-        commit('setManagers', response.data.data)
+        commit(MUTATION_SET, response.data.data)
       })
     } catch (e) {
       dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }
   },
-  async [CREATE] ({ dispatch, commit }, payload) {
+  async [ACTION_CREATE] ({ dispatch, commit }, payload) {
     try {
       await this.$axios.post(`${process.env.api}/bank/manager`, payload).then((response) => {
         dispatch('setMessage', { value: `${response.data.email} добавлен`, type: 'info' }, { root: true })
-        commit('addManager', response.data)
+        commit(MUTATION_ADD, response.data)
       })
     } catch (e) {
       dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
     }
   },
-  async [REMOVE] ({ dispatch, commit, getters }, payload) {
+  async [ACTION_REMOVE] ({ dispatch, commit, getters }, payload) {
     try {
       await this.$axios.delete(`${process.env.api}/bank/manager/${payload}`).then((response) => {
-        dispatch('setMessage', { value: `${getters.managerById(payload).email} удален`, type: 'warning' }, { root: true })
-        commit('removeManager', payload)
+        dispatch('setMessage', { value: `${getters[GETTER_GETONE](payload).email} удален`, type: 'warning' }, { root: true })
+        commit(MUTATION_REMOVE, payload)
       })
     } catch (e) {
       dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })

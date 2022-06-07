@@ -1,11 +1,12 @@
+import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE } from '@/store/mutation-types'
 export default {
-  setManagers (state, payload) {
+  [MUTATION_SET] (state, payload) {
     state.managers = payload
   },
-  addManager (state, payload) {
+  [MUTATION_ADD] (state, payload) {
     state.managers.push(payload)
   },
-  removeManager (state, payload) {
+  [MUTATION_REMOVE] (state, payload) {
     state.managers = state.managers.filter(item => item.id !== payload)
   }
 }

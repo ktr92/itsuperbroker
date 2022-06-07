@@ -1,6 +1,8 @@
 <template>
   <div>
     <ModuleManagerMain />
+    <ModuleBrokerMain />
+
     <!-- <div class="container columns-2 py-4 px-2">
       <AppList :list="brokers" :headers="brokerHeaders">
         <template #title>

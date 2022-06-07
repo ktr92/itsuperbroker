@@ -1,14 +1,14 @@
 <template>
   <div class="container columns-2 py-4 px-2">
-    <ListItems :list="brokers" :filterby="filterby" :searchby="searchby">
+    <ListItems :list="getItems" :searchby="searchby">
       <template #title>
-        Список брокеров
+        Список брокеров (тестовые - не через апи)
       </template>
       <template #items="slotProps">
-        <ModuleManagerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
+        <ModuleBrokerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
       </template>
     </ListItems>
-    <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="CREATE_IND">
+    <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="ACTION_CREATE">
       <template #header>
         Создание брокера
       </template>
@@ -18,16 +18,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { FETCH, CREATE_IND } from '@/store/action-types'
+import { ACTION_FETCH, ACTION_CREATE } from '@/store/action-types'
+import { GETTER_GETALL } from '@/store/getter-types'
 const NAMESPACE = 'brokers'
 
 export default {
   data () {
     return {
       NAMESPACE,
-      CREATE_IND,
-      searchby: ['name', 'companyName', 'address', 'kpp', 'ogrn', 'inn'],
-      headers: ['Название', 'Наименование', 'ИНН', 'Лого', 'E-mail', 'Телефон', 'Банк', 'Удалить'],
+      ACTION_CREATE,
+      searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],
+      headers: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Удалить'],
       formdata: [
         {
           model: '@email.com',
@@ -64,22 +65,16 @@ export default {
           type: 'text',
           placeholder: 'ID партнера',
           id: 'partner'
-        },
-        {
-          model: '10',
-          type: 'text',
-          placeholder: 'ID банка',
-          id: 'bank'
         }
       ]
     }
   },
   async fetch () {
-    await this.$store.dispatch(`${NAMESPACE}/${FETCH}`)
+    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`)
   },
   computed: {
     ...mapGetters(`${NAMESPACE}`,
-      ['brokers']
+      [GETTER_GETALL]
     )
   }
 }

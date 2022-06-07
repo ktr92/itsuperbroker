@@ -43,7 +43,7 @@ export default {
     },
     // фильтр данных по чекбокс фильтру
     itemsFiltered () {
-      return this.filterdata.length ? this.items.filter(item => this.filterdata.includes(item.bank.id)) : this.items
+      return this.filterdata.length ? this.items.filter(item => this.filterdata.includes(item[this.filter].id)) : this.items
     },
     // фильтр данных по поиску
     itemsSearch () {

@@ -1,4 +1,3 @@
-export const CREATE = 'add'
-export const CREATE_IND = 'add_individual'
-export const FETCH = 'fetch'
-export const REMOVE = 'remove'
+export const ACTION_CREATE = 'add'
+export const ACTION_FETCH = 'fetch'
+export const ACTION_REMOVE = 'remove'

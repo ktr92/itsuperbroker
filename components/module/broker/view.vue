@@ -29,9 +29,6 @@
           {{ item.phone }}
         </td>
         <td>
-          {{ item.bank.name }}
-        </td>
-        <td>
           <button
             class="redbutton"
             @click="remove(item.id)"
