@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     filterprop () {
-      return this.items.map(item => item[this.filter])
+      return this.items.map(item => item[this.filter] || [])
     },
     // итоговые данные для вывода = пересечение массивов данных по фильтру и поиску
     itemsSelected () {

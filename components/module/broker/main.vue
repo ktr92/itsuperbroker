@@ -1,16 +1,16 @@
 <template>
   <div class="container columns-2 py-4 px-2">
-    <ListItems :list="managers" :filterby="filterby" :searchby="searchby">
+    <ListItems :list="brokers" :filterby="filterby" :searchby="searchby">
       <template #title>
-        Список кураторов
+        Список брокеров
       </template>
       <template #items="slotProps">
         <ModuleManagerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
       </template>
     </ListItems>
-    <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="CREATE">
+    <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="CREATE_IND">
       <template #header>
-        Создание куратора
+        Создание брокера
       </template>
     </FormAddItem>
   </div>
@@ -18,17 +18,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { FETCH, CREATE } from '@/store/action-types'
-const NAMESPACE = 'managers'
+import { FETCH, CREATE_IND } from '@/store/action-types'
+const NAMESPACE = 'brokers'
 
 export default {
   data () {
     return {
       NAMESPACE,
-      CREATE,
-      searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],
-      headers: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Банк', 'Удалить'],
-      filterby: 'bank',
+      CREATE_IND,
+      searchby: ['name', 'companyName', 'address', 'kpp', 'ogrn', 'inn'],
+      headers: ['Название', 'Наименование', 'ИНН', 'Лого', 'E-mail', 'Телефон', 'Банк', 'Удалить'],
       formdata: [
         {
           model: '@email.com',
@@ -80,7 +79,7 @@ export default {
   },
   computed: {
     ...mapGetters(`${NAMESPACE}`,
-      ['managers']
+      ['brokers']
     )
   }
 }

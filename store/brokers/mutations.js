@@ -1,5 +1,8 @@
 export default {
-  setbrokers (state, payload) {
+  setBrokers (state, payload) {
     state.brokers = payload
+  },
+  addIndividual (state, payload) {
+    state.brokers.push(payload)
   }
 }
