@@ -5,7 +5,7 @@
         v-model="request"
         class="input"
         type="text"
-        placeholder="Поиск по контактам"
+        :placeholder="dataPlaceholder"
       >
       <button class="text-2xl align-top text-red-600" @click="reset">&times;</button>
     </label>
@@ -15,9 +15,16 @@
 <script>
 // компонент-поиск передает родителю введенную строку
 export default {
+  props: {
+    placeholder: {
+      type: String,
+      default: 'Поиск'
+    }
+  },
   data () {
     return {
-      request: ''
+      request: '',
+      dataPlaceholder: this.placeholder
     }
   },
   watch: {

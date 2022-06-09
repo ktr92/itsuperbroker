@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LazyListFilterSearch v-if="search" @searchlist="searchlist" />
+    <LazyListFilterSearch v-if="search" placeholder="Поиск по контактам" @searchlist="searchlist" />
     <LazyListFilterCheckbox v-if="filter" :filterby="filterprop" @filterlist="filterlist" />
   </div>
 </template>
