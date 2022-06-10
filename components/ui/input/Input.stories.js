@@ -14,7 +14,7 @@ export default {
 
 const DefaultTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  template: '<UiInput :value="value" :inputtype="inputtype" :inputplaceholder="inputplaceholder" :inputname="inputname" />'
+  template: '<UiInput v-bind="$props" />'
 })
 export const Default = DefaultTemplate.bind({})
 
@@ -39,8 +39,8 @@ EmailInvalid.args = {
 
 export const EmailValid = DefaultTemplate.bind({})
 EmailValid.args = {
-  value: 'email@exaple.com',
-  inputtype: 'email'
+  ...EmailInvalid.args,
+  value: 'email@example.com'
 }
 export const Password = DefaultTemplate.bind({})
 Password.args = {
