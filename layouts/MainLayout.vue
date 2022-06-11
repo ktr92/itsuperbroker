@@ -1,6 +1,6 @@
 <template>
   <div>
     <Nuxt />
-    <AppMessage />
+    <UiMessage />
   </div>
 </template>

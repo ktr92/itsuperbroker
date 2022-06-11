@@ -2,7 +2,7 @@
 import UiInput from './Input'
 
 export default {
-  title: 'UiInput',
+  title: 'Ui/Input',
   component: UiInput,
   args: {
     value: '',
