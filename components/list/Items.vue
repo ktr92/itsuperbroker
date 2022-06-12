@@ -12,6 +12,7 @@
         >
           <slot name="items" :items="itemsfilter" />
         </template>
+        <ListPager :total-items-prop="20" :current-page-prop="1" :per-page-prop="6" />
       </div>
     </div>
   </div>

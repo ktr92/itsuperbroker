@@ -1,4 +1,4 @@
-import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE } from '@/store/mutation-types'
+import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE, MUTATION_TOTAL } from '@/store/mutation-types'
 export default {
   [MUTATION_SET] (state, payload) {
     state.managers = payload
@@ -8,5 +8,8 @@ export default {
   },
   [MUTATION_REMOVE] (state, payload) {
     state.managers = state.managers.filter(item => item.id !== payload)
+  },
+  [MUTATION_TOTAL] (state, payload) {
+    state.total = payload
   }
 }

@@ -1,3 +1,4 @@
 export default () => ({
-  managers: []
+  managers: [],
+  total: 0
 })

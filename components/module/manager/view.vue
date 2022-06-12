@@ -1,6 +1,6 @@
 <template>
   <table>
-    <thead v-if="dataheader.length">
+    <thead v-if="dataheader">
       <tr>
         <th v-for="item in dataheader" :key="item">
           {{ item }}
@@ -48,7 +48,18 @@
 import moduleview from '@/mixins/module-view'
 // компонент для вывода данных по куратору (вид таблицы)
 export default {
-  mixins: [moduleview]
+  mixins: [moduleview],
+  props: {
+    headers: {
+      type: Array,
+      default: null
+    }
+  },
+  data () {
+    return {
+      dataheader: this.headers
+    }
+  }
 }
 </script>
 

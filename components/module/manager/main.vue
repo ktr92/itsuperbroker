@@ -8,11 +8,13 @@
         <ModuleManagerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
       </template>
     </ListItems>
-    <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="ACTION_CREATE">
-      <template #header>
-        Создание куратора
-      </template>
-    </FormAddItem>
+    <template v-if="formdata.length">
+      <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="ACTION_CREATE">
+        <template #header>
+          Создание куратора
+        </template>
+      </FormAddItem>
+    </template>
   </div>
 </template>
 
@@ -21,6 +23,8 @@ import { mapGetters } from 'vuex'
 import { ACTION_FETCH, ACTION_CREATE } from '@/store/action-types'
 import { GETTER_GETALL } from '@/store/getter-types'
 const NAMESPACE = 'managers'
+const PAGE = 1
+const ITEMS_PER_PAGE = 5
 
 export default {
   data () {
@@ -77,7 +81,7 @@ export default {
     }
   },
   async fetch () {
-    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`)
+    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: PAGE, itemsPerPage: ITEMS_PER_PAGE })
   },
   computed: {
     ...mapGetters(`${NAMESPACE}`,
