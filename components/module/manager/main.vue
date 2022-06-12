@@ -1,11 +1,17 @@
 <template>
   <div class="container columns-2 py-4 px-2">
-    <ListItems :list="getItems" :filterby="filterby" :searchby="searchby">
+    <div v-if="$fetchState.pending">
+      Загрузка данных...
+    </div>
+    <ListItems v-else :list="getItems" :filterby="filterby" :searchby="searchby">
       <template #title>
         Список кураторов
       </template>
       <template #items="slotProps">
         <ModuleManagerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
+      </template>
+      <template #nav>
+        <ListPager :key="getTotal" :total-items-prop="getTotal" :current-page-prop="getPage" :per-page-prop="getPerPage" @pageChanged="pageChanged" />
       </template>
     </ListItems>
     <template v-if="formdata.length">
@@ -21,10 +27,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import { ACTION_FETCH, ACTION_CREATE } from '@/store/action-types'
-import { GETTER_GETALL } from '@/store/getter-types'
+import { GETTER_GETALL, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETPERPAGE } from '@/store/getter-types'
+import { MUTATION_PAGENUMBER } from '@/store/mutation-types'
 const NAMESPACE = 'managers'
-const PAGE = 1
-const ITEMS_PER_PAGE = 5
 
 export default {
   data () {
@@ -81,12 +86,18 @@ export default {
     }
   },
   async fetch () {
-    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: PAGE, itemsPerPage: ITEMS_PER_PAGE })
+    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: this.getPage, itemsPerPage: this.getPerPage })
   },
   computed: {
     ...mapGetters(`${NAMESPACE}`,
-      [GETTER_GETALL]
+      [GETTER_GETALL, GETTER_GETPERPAGE, GETTER_GETPAGE, GETTER_GETTOTAL]
     )
+  },
+  methods: {
+    async pageChanged (page) {
+      await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: page, itemsPerPage: this.getPerPage })
+      this.$store.commit(MUTATION_PAGENUMBER, page)
+    }
   }
 }
 </script>

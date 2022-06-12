@@ -1,4 +1,4 @@
-import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE, MUTATION_TOTAL } from '@/store/mutation-types'
+import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE, MUTATION_TOTAL, MUTATION_PAGENUMBER } from '@/store/mutation-types'
 export default {
   [MUTATION_SET] (state, payload) {
     state.managers = payload
@@ -11,5 +11,8 @@ export default {
   },
   [MUTATION_TOTAL] (state, payload) {
     state.total = payload
+  },
+  [MUTATION_PAGENUMBER] (state, payload) {
+    state.pageNumber = payload
   }
 }

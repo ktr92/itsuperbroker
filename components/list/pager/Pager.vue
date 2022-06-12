@@ -130,7 +130,7 @@ export default {
   methods: {
     changePage (page) {
       if (page > 0 && page <= this.totalPages) {
-        /* this.$emit('page-changed', page) */
+        this.$emit('pageChanged', page)
         this.currentPage = page
       }
     }

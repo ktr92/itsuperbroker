@@ -1,3 +1,5 @@
 export const GETTER_GETALL = 'getItems'
 export const GETTER_GETONE = 'getById'
 export const GETTER_GETTOTAL = 'getTotal'
+export const GETTER_GETPERPAGE = 'getPerPage'
+export const GETTER_GETPAGE = 'getPage'
