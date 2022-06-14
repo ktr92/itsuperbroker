@@ -27,7 +27,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { ACTION_FETCH, ACTION_CREATE, ACTION_FETCHBANKS } from '@/store/action-types'
-import { GETTER_GETALL, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETPERPAGE, GETTER_GETBANKS } from '@/store/getter-types'
+import { GETTER_GETALL, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETPERPAGE, GETTER_GETBANKS, GETTER_GETBANKID } from '@/store/getter-types'
 import { MUTATION_PAGENUMBER } from '@/store/mutation-types'
 const NAMESPACE = 'managers'
 
@@ -85,17 +85,17 @@ export default {
     }
   },
   async fetch () {
-    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: this.getPage, itemsPerPage: this.getPerPage })
+    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: this.getPage, itemsPerPage: this.getPerPage, bankId: this.getBankId })
     await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCHBANKS}`)
   },
   computed: {
     ...mapGetters(`${NAMESPACE}`,
-      [GETTER_GETALL, GETTER_GETPERPAGE, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETBANKS]
+      [GETTER_GETALL, GETTER_GETPERPAGE, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETBANKS, GETTER_GETBANKID]
     )
   },
   methods: {
     async pageChanged (page) {
-      await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: page, itemsPerPage: this.getPerPage })
+      await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: page, itemsPerPage: this.getPerPage, bankId: this.getBankId })
       this.$store.commit(MUTATION_PAGENUMBER, page)
     }
   }

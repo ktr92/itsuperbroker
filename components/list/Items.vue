@@ -6,7 +6,6 @@
       </h1>
       <div>
         <LazyListFilterGroup
-          v-if="items.length"
           :filtered="items"
           :namespace="namespace"
           :filterby="filterprop"
@@ -19,6 +18,9 @@
         >
           <slot name="items" :items="itemsfilter" />
         </template>
+        <div v-else class="my-4">
+          Ничего не найдено...
+        </div>
         <slot name="nav" />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE, MUTATION_TOTAL, MUTATION_PAGENUMBER, MUTATION_SETBANK } from '@/store/mutation-types'
+import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE, MUTATION_TOTAL, MUTATION_PAGENUMBER, MUTATION_SETBANK, MUTATION_SETBANKID } from '@/store/mutation-types'
 export default {
   [MUTATION_SET] (state, payload) {
     state.managers = payload
@@ -17,5 +17,8 @@ export default {
   },
   [MUTATION_SETBANK] (state, payload) {
     state.banks = payload
+  },
+  [MUTATION_SETBANKID] (state, payload) {
+    state.bankId = payload
   }
 }

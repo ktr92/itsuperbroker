@@ -3,12 +3,15 @@
     <div>
       <div class="select">
         <div class="select__label" @click="isHidden = !isHidden">
-          <span v-if="selected" class="select__items">
+          <span v-if="selected" class="select__items" :class="{'active': selected.name}">
             <img v-if="selected.logo" :src="selected.logo" alt="" class="select__labellogo">
             <span v-if="selected.name" class="select__labelname">{{ selected.name }}</span>
             <span v-else>{{ filtername }}</span>
           </span>
         </div>
+        <button class="text-2xl align-top text-red-600" @click="selectReset">
+          &times;
+        </button>
         <div class="select__dropdown" :class="{'hidden': isHidden}">
           <input
             v-model="suggestion"
@@ -16,14 +19,11 @@
             type="text"
             placeholder="Начните вводить название..."
           >
-          <div class="select_reset select__item bg-gray-200" @click="selectReset">
-            <span>Сбросить</span>
-          </div>
           <div v-for="item in showdata" :key="item.id">
             <li class="select__item" :class="[active == item.id ? 'selected ' : 'notselected']" @click="selectFetch(item)">
               <div class="select__content">
                 <img v-if="item.logo" :src="item.logo" alt="" class="select__logo">
-                <span v-if="item.name" class="pl-2">
+                <span v-if="item.name" class="select__text">
                   {{ item.name }}
                 </span>
               </div>
@@ -72,6 +72,7 @@ export default {
     selectReset () {
       this.selected = []
       this.isHidden = true
+      this.active = null
       this.$emit('selectReset')
     },
     selectFetch (arg) {
@@ -89,7 +90,7 @@ export default {
 @tailwind components;
 @layer components {
 .select__label {
-    @apply relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+    @apply relative rounded border px-4 py-2 w-full inline-block max-w-xs
   }
   .select__dropdown {
     @apply absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm
@@ -101,10 +102,19 @@ export default {
     @apply flex-shrink-0 h-6 w-6 rounded-full
   }
   .select__input {
-    @apply block w-full py-2 px-4
+  @apply block w-full py-2 px-4 text-black border mx-4 p-2 max-w-xs
   }
   .select__content {
     @apply flex items-center
+  }
+  .select__text {
+    @apply pl-2
+  }
+  .select__items {
+    @apply text-gray-400
+  }
+  .select__items.active {
+    @apply text-black
   }
   .select__labelname {
     @apply ml-3 block truncate

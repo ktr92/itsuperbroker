@@ -1,6 +1,6 @@
 <template>
   <div class="form-group mb-2">
-    <ValidationProvider v-slot="{ errors }" rules="required" :immediate="true">
+    <ValidationProvider v-slot="{ errors }" :rules="validators" :immediate="true">
       <input
         v-model="initialValue"
         :class="{'border-red-600': errors[0]}"
@@ -45,6 +45,10 @@ export default {
     inputtype: {
       type: String,
       default: 'text'
+    },
+    validators: {
+      type: String,
+      default: 'required'
     }
   },
   data () {
