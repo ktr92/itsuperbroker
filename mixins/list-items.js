@@ -5,12 +5,16 @@ export default {
       default: []
     },
     filterby: {
-      type: String,
-      default: null
+      type: Array,
+      default: []
     },
     searchby: {
       type: Array,
       default: null
+    },
+    namespace: {
+      type: String,
+      required: true
     }
   },
   data () {

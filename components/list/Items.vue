@@ -1,11 +1,18 @@
 <template>
   <div>
-    <div v-if="items.length" class="w-full p-4">
+    <div class="w-full p-4">
       <h1 class="my-4">
         <slot name="title" />
       </h1>
       <div>
-        <LazyListFilterGroup v-if="items.length" :filtered="items" :filterby="filterprop" :searchby="searchprop" @filter="filter" />
+        <LazyListFilterGroup
+          v-if="items.length"
+          :filtered="items"
+          :namespace="namespace"
+          :filterby="filterprop"
+          :searchby="searchprop"
+          @filter="filter"
+        />
         <template
           v-if="itemsfilter.length"
           class="my-4"

@@ -4,8 +4,9 @@
       <div class="select">
         <div class="select__label" @click="isHidden = !isHidden">
           <span v-if="selected" class="select__items">
-            <img :src="selected.logo" alt="" class="select__labellogo">
-            <span class="select__labelname">{{ selected.name }}</span>
+            <img v-if="selected.logo" :src="selected.logo" alt="" class="select__labellogo">
+            <span v-if="selected.name" class="select__labelname">{{ selected.name }}</span>
+            <span v-else>{{ filtername }}</span>
           </span>
         </div>
         <div class="select__dropdown" :class="{'hidden': isHidden}">
@@ -15,8 +16,11 @@
             type="text"
             placeholder="Начните вводить название..."
           >
+          <div class="select_reset select__item bg-gray-200" @click="selectReset">
+            <span>Сбросить</span>
+          </div>
           <div v-for="item in showdata" :key="item.id">
-            <li class="select__item" :class="[active == item.id ? 'selected ' : 'notselected']" @click="selectIt(item)">
+            <li class="select__item" :class="[active == item.id ? 'selected ' : 'notselected']" @click="selectFetch(item)">
               <div class="select__content">
                 <img v-if="item.logo" :src="item.logo" alt="" class="select__logo">
                 <span v-if="item.name" class="pl-2">
@@ -35,6 +39,10 @@
 
 export default {
   props: {
+    filtername: {
+      type: String,
+      default: 'Фильтр по банку'
+    },
     filterby: {
       type: Array,
       require: true,
@@ -56,23 +64,22 @@ export default {
     }
   },
   watch: {
-    /*  selected () {
-      this.$emit('filterlist', this.selected)
-    }, */
     filterby () {
       this.data = this.filterby
     }
   },
   methods: {
-    reset () {
+    selectReset () {
       this.selected = []
+      this.isHidden = true
+      this.$emit('selectReset')
     },
-    selectIt (arg) {
+    selectFetch (arg) {
       this.suggestion = ''
       this.active = arg.id
       this.selected = arg
       this.isHidden = true
-      /*  this.$emit('filterlist', this.selected) */
+      this.$emit('selectFetch', this.selected.id)
     }
   }
 }

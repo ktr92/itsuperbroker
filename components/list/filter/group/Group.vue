@@ -1,13 +1,17 @@
 <template>
   <div>
     <LazyListFilterSearch v-if="search" placeholder="Поиск по контактам" @searchlist="searchlist" />
-    <LazyListFilterCheckbox v-if="filter" :filterby="filterprop" @filterlist="filterlist" />
+    <!--  <LazyListFilterCheckbox v-if="filter" :filterby="filterprop" @filterlist="filterlist" /> -->
+    <LazyListFilterSelect v-if="filter" :filterby="filter" @selectFetch="selectFetch" @selectReset="selectReset" />
   </div>
 </template>
 
 <script>
 import { intersectionBy } from 'lodash'
 import { helperFindby } from '@/utils/helpers'
+import { ACTION_FETCH } from '@/store/action-types'
+import { GETTER_GETPAGE, GETTER_GETPERPAGE } from '@/store/getter-types'
+
 // компонент для фильтрации данных
 export default {
   props: {
@@ -16,12 +20,16 @@ export default {
       default: null
     },
     filterby: {
-      type: String,
+      type: Array,
       default: null
     },
     searchby: {
       type: Array,
       default: null
+    },
+    namespace: {
+      type: String,
+      required: true
     }
   },
   data () {
@@ -34,9 +42,6 @@ export default {
     }
   },
   computed: {
-    filterprop () {
-      return this.items.map(item => item[this.filter] || [])
-    },
     // итоговые данные для вывода = пересечение массивов данных по фильтру и поиску
     itemsSelected () {
       return intersectionBy(this.items, this.itemsSearch, this.itemsFiltered, 'id') || this.items
@@ -48,6 +53,12 @@ export default {
     // фильтр данных по поиску
     itemsSearch () {
       return this.search ? this.items.filter(item => helperFindby(item, this.search, this.searchdata)) : this.items
+    },
+    getPage () {
+      return this.$store.getters[`${this.namespace}/${GETTER_GETPAGE}`]
+    },
+    getPerPage () {
+      return this.$store.getters[`${this.namespace}/${GETTER_GETPERPAGE}`]
     }
   },
   watch: {
@@ -59,11 +70,18 @@ export default {
     }
   },
   methods: {
-    // эмит из компонента AppFilter
+    // эмит из компонента ListFilterCheckbox
     filterlist (data) {
       this.filterdata = data
     },
-    // эмит из компонента AppSearch
+    // эмит из компонента ListFilterSelect
+    async selectFetch (selected) {
+      await this.$store.dispatch(`${this.namespace}/${ACTION_FETCH}`, { currentPage: this.getPage, itemsPerPage: this.getPerPage, bankId: selected })
+    },
+    async selectReset () {
+      await this.$store.dispatch(`${this.namespace}/${ACTION_FETCH}`, { currentPage: this.getPage, itemsPerPage: this.getPerPage, bankId: 0 })
+    },
+    // эмит из компонента ListFilterSearch
     searchlist (data) {
       this.searchdata = data
     }

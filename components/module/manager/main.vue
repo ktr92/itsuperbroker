@@ -3,7 +3,7 @@
     <div v-if="$fetchState.pending">
       Загрузка данных...
     </div>
-    <ListItems v-else :list="getItems" :filterby="filterby" :searchby="searchby">
+    <ListItems v-else :list="getItems" :filterby="getBanks" :searchby="searchby" :namespace="NAMESPACE">
       <template #title>
         Список кураторов
       </template>
@@ -26,8 +26,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { ACTION_FETCH, ACTION_CREATE } from '@/store/action-types'
-import { GETTER_GETALL, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETPERPAGE } from '@/store/getter-types'
+import { ACTION_FETCH, ACTION_CREATE, ACTION_FETCHBANKS } from '@/store/action-types'
+import { GETTER_GETALL, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETPERPAGE, GETTER_GETBANKS } from '@/store/getter-types'
 import { MUTATION_PAGENUMBER } from '@/store/mutation-types'
 const NAMESPACE = 'managers'
 
@@ -38,7 +38,6 @@ export default {
       ACTION_CREATE,
       searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],
       headers: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Банк', 'Удалить'],
-      filterby: 'bank',
       formdata: [
         {
           model: '@email.com',
@@ -87,10 +86,11 @@ export default {
   },
   async fetch () {
     await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCH}`, { currentPage: this.getPage, itemsPerPage: this.getPerPage })
+    await this.$store.dispatch(`${NAMESPACE}/${ACTION_FETCHBANKS}`)
   },
   computed: {
     ...mapGetters(`${NAMESPACE}`,
-      [GETTER_GETALL, GETTER_GETPERPAGE, GETTER_GETPAGE, GETTER_GETTOTAL]
+      [GETTER_GETALL, GETTER_GETPERPAGE, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETBANKS]
     )
   },
   methods: {
