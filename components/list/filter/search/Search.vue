@@ -6,6 +6,7 @@
         class="input"
         type="text"
         :placeholder="dataPlaceholder"
+        title="Сбросить"
       >
       <button class="text-2xl align-top text-red-600" @click="reset">&times;</button>
     </label>

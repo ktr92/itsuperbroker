@@ -9,7 +9,7 @@
             <span v-else>{{ filtername }}</span>
           </span>
         </div>
-        <button class="text-2xl align-top text-red-600" @click="selectReset">
+        <button class="text-2xl align-top text-red-600" title="Сбросить" @click="selectReset">
           &times;
         </button>
         <div class="select__dropdown" :class="{'hidden': isHidden}">
