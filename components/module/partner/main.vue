@@ -1,0 +1,50 @@
+<template>
+  <div>
+    <button class="button button_inline" @click="showModal = true">
+      Редактировать реквизиты
+    </button>
+    <LazyUiModal v-if="showModal" @closeModal="showModal = false">
+      <template #header>
+        Редактирование реквизитов
+      </template>
+      <template #body>
+        <FormEdit :input="formdata" />
+      </template>
+    </LazyUiModal>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      formdata: [
+        {
+          model: '1234567890',
+          id: 'inn'
+        },
+        {
+          model: 'companyName',
+          id: 'ООО Юнистрой'
+        },
+        {
+          model: '1234567890',
+          id: 'ogrn'
+        },
+        {
+          model: '1234567890',
+          id: 'kpp'
+        },
+        {
+          model: 'Москва, Пресненская набережная, 1',
+          id: 'address'
+        }
+      ]
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>

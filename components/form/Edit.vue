@@ -1,9 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="mb-4">
-      <h2><slot name="header" /></h2>
-    </div>
-    <div v-if="dataArr.length">
+    <template v-if="dataArr.length">
       <ValidationObserver v-slot="{ invalid }">
         <form @submit.prevent="onSubmit">
           <UiInput
@@ -19,12 +16,12 @@
               type="submit"
               :disabled="invalid"
             >
-              Отправить
+              Сохранить
             </button>
           </div>
         </form>
       </ValidationObserver>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -40,19 +37,10 @@ export default {
     input: {
       type: Array,
       default: null
-    },
-    namespace: {
-      type: String,
-      required: true
-    },
-    method: {
-      type: String,
-      required: true
     }
   },
   data () {
     return {
-      // данные для формы: id = ключ для объекта модели; model = значение
       dataArr: this.input
     }
   },
@@ -63,13 +51,13 @@ export default {
     }
   },
   methods: {
-    async onSubmit () {
+    /* async onSubmit () {
       try {
         await this.$store.dispatch(`${this.namespace}/${this.method}`, this.formData)
       } catch (e) {
         this.$store.dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
       }
-    }
+    } */
   }
 }
 </script>

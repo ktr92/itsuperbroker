@@ -9,6 +9,9 @@
   button.redbutton {
     @apply bg-red-400 rounded text-white px-4
   }
+  button.button_inline {
+    @apply inline-block w-auto
+  }
   .input {
     @apply rounded border px-4 py-2 w-full inline-block max-w-xs
   }

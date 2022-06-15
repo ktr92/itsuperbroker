@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ModulePartnerMain />
     <ModuleManagerMain />
     <!-- <ModuleBrokerMain /> -->
   </div>

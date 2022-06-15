@@ -48,7 +48,8 @@ export default {
   ],
 
   plugins: [
-    '~/plugins/vee-validate'
+    '~/plugins/vee-validate',
+    '~/plugins/globals'
   ],
   auth: {
     strategies: {

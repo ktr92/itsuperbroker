@@ -14,13 +14,21 @@
         <ListPager :key="getTotal" :total-items-prop="getTotal" :current-page-prop="getPage" :per-page-prop="getPerPage" @pageChanged="pageChanged" />
       </template>
     </ListItems>
-    <template v-if="formdata.length">
-      <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="ACTION_CREATE">
-        <template #header>
-          Создание куратора
-        </template>
-      </FormAddItem>
-    </template>
+    <div>
+      <button class="button button_inline" @click="showModal = true">
+        Создать куратора
+      </button>
+      <template v-if="formdata.length">
+        <LazyUiModal v-if="showModal" @closeModal="showModal = false">
+          <template #header>
+            Создание куратора
+          </template>
+          <template #body>
+            <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="ACTION_CREATE" />
+          </template>
+        </LazyUiModal>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -34,6 +42,7 @@ const NAMESPACE = 'managers'
 export default {
   data () {
     return {
+      showModal: false,
       NAMESPACE,
       ACTION_CREATE,
       searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],
