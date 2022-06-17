@@ -44,7 +44,6 @@ export default {
   middleware: 'auth',
   data () {
     return {
-      showModal: false,
       NAMESPACE,
       ACTION_CREATE,
       searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],

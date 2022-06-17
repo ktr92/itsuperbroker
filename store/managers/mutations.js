@@ -1,4 +1,4 @@
-import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE, MUTATION_TOTAL, MUTATION_PAGENUMBER, MUTATION_SETBANK, MUTATION_SETBANKID } from '@/store/mutation-types'
+import { MUTATION_ADD, MUTATION_SET, MUTATION_REMOVE, MUTATION_TOTAL, MUTATION_PAGENUMBER, MUTATION_SETBANK, MUTATION_SETBANKID, MUTATION_PERPAGE } from '@/store/mutation-types'
 export default {
   [MUTATION_SET] (state, payload) {
     state.managers = payload
@@ -14,6 +14,9 @@ export default {
   },
   [MUTATION_PAGENUMBER] (state, payload) {
     state.pageNumber = payload
+  },
+  [MUTATION_PERPAGE] (state, payload) {
+    state.itemsPerPage = payload
   },
   [MUTATION_SETBANK] (state, payload) {
     state.banks = payload
