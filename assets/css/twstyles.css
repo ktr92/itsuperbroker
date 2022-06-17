@@ -3,8 +3,8 @@
   th, td{
     @apply px-2 py-4 text-left border-b-2
   }
-  button[type="submit"], button.button {
-    @apply bg-green-500 rounded text-white px-8 py-2 font-bold block w-full
+  button[type="submit"], .button {
+    @apply bg-green-500 rounded text-white px-8 py-2 font-bold inline-block w-full
   }
   button.redbutton {
     @apply bg-red-400 rounded text-white px-4
@@ -56,6 +56,13 @@
   }
   .pagerNumber {
     @apply border relative inline-flex items-center px-4 py-2 text-sm font-medium
+  }
+  .navlink {
+    @apply bg-green-800 rounded text-white px-8 py-2 font-bold inline-block w-full
+  }
+
+  .nuxt-link-active .navlink {
+    @apply bg-green-600
   }
   
  

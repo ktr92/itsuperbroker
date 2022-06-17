@@ -16,6 +16,8 @@
 
 <script>
 export default {
+  layout: 'MainLayout',
+  middleware: 'auth',
   data () {
     return {
       formdata: [

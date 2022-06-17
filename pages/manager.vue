@@ -1,5 +1,5 @@
 <template>
-  <div class="container columns-2 py-4 px-2">
+  <div class="columns-2 py-4 px-2">
     <div v-if="$fetchState.pending">
       Загрузка данных...
     </div>
@@ -40,6 +40,8 @@ import { MUTATION_PAGENUMBER } from '@/store/mutation-types'
 const NAMESPACE = 'managers'
 
 export default {
+  layout: 'MainLayout',
+  middleware: 'auth',
   data () {
     return {
       showModal: false,

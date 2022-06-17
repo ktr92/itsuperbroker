@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <ModulePartnerMain />
-    <ModuleManagerMain />
-    <!-- <ModuleBrokerMain /> -->
-  </div>
+  <div class="" />
 </template>
 
 <script>

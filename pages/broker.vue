@@ -1,5 +1,5 @@
 <template>
-  <div class="container columns-2 py-4 px-2">
+  <div class="columns-2 py-4 px-2">
     <ListItems :list="getItems" :searchby="searchby">
       <template #title>
         Список брокеров (тестовые - не через апи)
@@ -23,6 +23,8 @@ import { GETTER_GETALL } from '@/store/getter-types'
 const NAMESPACE = 'brokers'
 
 export default {
+  layout: 'MainLayout',
+  middleware: 'auth',
   data () {
     return {
       NAMESPACE,
