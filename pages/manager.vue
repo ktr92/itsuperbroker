@@ -15,11 +15,11 @@
       </template>
     </ListItems>
     <div>
-      <button class="button button_inline" @click="showModal = true">
+      <UiModalButton class="button button_inline">
         Создать куратора
-      </button>
+      </UiModalButton>
       <template v-if="formdata.length">
-        <LazyUiModal v-if="showModal" @closeModal="showModal = false">
+        <LazyUiModal>
           <template #header>
             Создание куратора
           </template>

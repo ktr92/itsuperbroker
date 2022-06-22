@@ -1,17 +1,19 @@
 <template>
-  <div class="modal">
-    <div class="modal__wrapper">
-      <div class="modal__content">
-        <div class="modal__header">
-          <slot name="header" />
-          <button type="button" class="modal__close" @click.prevent="$emit('closeModal')">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-          </button>
-        </div>
-        <div class="modal__body">
-          <slot name="body">
-            Здесь ничего нет...
-          </slot>
+  <div>
+    <div v-if="showModal" class="modal" @click="close">
+      <div class="modal__wrapper">
+        <div class="modal__content" @click.stop>
+          <div class="modal__header">
+            <slot name="header" />
+            <button type="button" class="modal__close" @click.prevent="close">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            </button>
+          </div>
+          <div class="modal__body">
+            <slot name="body">
+              Здесь ничего нет...
+            </slot>
+          </div>
         </div>
       </div>
     </div>
@@ -19,7 +21,18 @@
 </template>
 
 <script>
+
 export default {
+  computed: {
+    showModal () {
+      return this.$store.getters.showModal
+    }
+  },
+  methods: {
+    close () {
+      this.$store.dispatch('toggleModal')
+    }
+  }
 }
 </script>
 

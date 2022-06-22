@@ -1,9 +1,9 @@
 <template>
   <div>
-    <button class="button button_inline" @click="showModal = true">
+    <UiModalButton class="button button_inline">
       Редактировать реквизиты
-    </button>
-    <LazyUiModal v-if="showModal" @closeModal="showModal = false">
+    </UiModalButton>
+    <LazyUiModal>
       <template #header>
         Редактирование реквизитов
       </template>
