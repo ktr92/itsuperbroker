@@ -1,9 +1,9 @@
 <template>
   <div>
-    <UiModalButton class="button button_inline">
-      Редактировать реквизиты
-    </UiModalButton>
     <LazyUiModal>
+      <template #button>
+        Редактировать реквизиты
+      </template>
       <template #header>
         Редактирование реквизитов
       </template>

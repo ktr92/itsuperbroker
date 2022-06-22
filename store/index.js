@@ -1,6 +1,5 @@
 export const state = () => ({
-  message: null,
-  showModal: false
+  message: null
 })
 
 export const actions = {
@@ -10,9 +9,6 @@ export const actions = {
     setTimeout(() => {
       commit('clearMessage')
     }, 5000)
-  },
-  toggleModal ({ commit }) {
-    commit('toggleModal')
   }
 }
 
@@ -22,13 +18,7 @@ export const mutations = {
   },
   clearMessage (state) {
     state.message = null
-  },
-  toggleModal (state) {
-    state.showModal = !state.showModal
   }
 }
 
-export const getters = {
-  message: state => state.message,
-  showModal: state => state.showModal
-}
+export const getters = { message: state => state.message }
