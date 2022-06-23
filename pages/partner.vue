@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LazyUiModal>
+    <UiModal>
       <template #button>
         Редактировать реквизиты
       </template>
@@ -10,7 +10,7 @@
       <template #body>
         <FormEdit :input="formdata" />
       </template>
-    </LazyUiModal>
+    </UiModal>
   </div>
 </template>
 

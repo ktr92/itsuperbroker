@@ -3,17 +3,17 @@
     <div v-if="$fetchState.pending">
       Загрузка данных...
     </div>
-    <ListItems v-else :list="getItems" :filterby="getBanks" :searchby="searchby" :namespace="NAMESPACE">
+    <LazyListItems v-else :list="getItems" :filterby="getBanks" :searchby="searchby" :namespace="NAMESPACE">
       <template #title>
         Список кураторов
       </template>
       <template #items="slotProps">
-        <ModuleManagerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
+        <LazyModuleManagerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
       </template>
       <template #nav>
         <ListPager :key="getTotal" :total-items-prop="getTotal" :current-page-prop="getPage" :per-page-prop="getPerPage" @pageChanged="pageChanged" />
       </template>
-    </ListItems>
+    </LazyListItems>
     <div>
       <template v-if="formdata.length">
         <LazyUiModal>
@@ -24,7 +24,7 @@
             Создание куратора
           </template>
           <template #body>
-            <FormAddItem :input="formdata" :namespace="NAMESPACE" />
+            <LazyFormAddItem :input="formdata" :namespace="NAMESPACE" />
           </template>
         </LazyUiModal>
       </template>

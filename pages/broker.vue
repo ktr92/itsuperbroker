@@ -1,18 +1,31 @@
 <template>
   <div class="columns-2 py-4 px-2">
-    <ListItems :list="getItems" :searchby="searchby">
+    <div v-if="$fetchState.pending">
+      Загрузка данных...
+    </div>
+    <LazyListItems v-else :list="getItems" :searchby="searchby">
       <template #title>
-        Список брокеров (тестовые - не через апи)
+        Список брокеров
       </template>
       <template #items="slotProps">
-        <ModuleBrokerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
+        <LazyModuleBrokerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
       </template>
-    </ListItems>
-    <FormAddItem :input="formdata" :namespace="NAMESPACE">
-      <template #header>
-        Создание брокера
+    </LazyListItems>
+    <div>
+      <template v-if="formdata.length">
+        <LazyUiModal>
+          <template #button>
+            Создать брокера
+          </template>
+          <template #header>
+            Создание брокера
+          </template>
+          <template #body>
+            <LazyFormAddItem :input="formdata" :namespace="NAMESPACE" />
+          </template>
+        </LazyUiModal>
       </template>
-    </FormAddItem>
+    </div>
   </div>
 </template>
 
