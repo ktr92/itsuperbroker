@@ -24,7 +24,7 @@
             Создание куратора
           </template>
           <template #body>
-            <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="ACTION_CREATE" />
+            <FormAddItem :input="formdata" :namespace="NAMESPACE" />
           </template>
         </LazyUiModal>
       </template>
@@ -34,7 +34,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { ACTION_FETCH, ACTION_CREATE, ACTION_FETCHBANKS } from '@/store/action-types'
+import { ACTION_FETCH, ACTION_FETCHBANKS } from '@/store/action-types'
 import { GETTER_GETALL, GETTER_GETPAGE, GETTER_GETTOTAL, GETTER_GETPERPAGE, GETTER_GETBANKS, GETTER_GETBANKID } from '@/store/getter-types'
 import { MUTATION_PAGENUMBER } from '@/store/mutation-types'
 const NAMESPACE = 'managers'
@@ -45,7 +45,6 @@ export default {
   data () {
     return {
       NAMESPACE,
-      ACTION_CREATE,
       searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],
       headers: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Банк', 'Удалить'],
       formdata: [

@@ -31,6 +31,7 @@
 <script>
 import { ValidationObserver } from 'vee-validate'
 import { helperSetmodel } from '@/utils/helpers'
+import { ACTION_CREATE } from '@/store/action-types'
 
 export default {
   components: {
@@ -65,7 +66,7 @@ export default {
   methods: {
     async onSubmit () {
       try {
-        await this.$store.dispatch(`${this.namespace}/${this.method}`, this.formData)
+        await this.$store.dispatch(`${this.namespace}/${ACTION_CREATE}`, this.formData)
       } catch (e) {
         this.$store.dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
       }

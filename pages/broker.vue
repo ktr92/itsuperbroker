@@ -8,7 +8,7 @@
         <ModuleBrokerView :items="slotProps.items" :namespace="NAMESPACE" :headers="headers" />
       </template>
     </ListItems>
-    <FormAddItem :input="formdata" :namespace="NAMESPACE" :method="ACTION_CREATE">
+    <FormAddItem :input="formdata" :namespace="NAMESPACE">
       <template #header>
         Создание брокера
       </template>
@@ -18,7 +18,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { ACTION_FETCH, ACTION_CREATE } from '@/store/action-types'
+import { ACTION_FETCH } from '@/store/action-types'
 import { GETTER_GETALL } from '@/store/getter-types'
 const NAMESPACE = 'brokers'
 
@@ -28,7 +28,6 @@ export default {
   data () {
     return {
       NAMESPACE,
-      ACTION_CREATE,
       searchby: ['email', 'phone', 'firstName', 'lastName', 'middleName'],
       headers: ['Имя', 'Фамилия', 'Отчество', 'E-mail', 'Телефон', 'Удалить'],
       formdata: [

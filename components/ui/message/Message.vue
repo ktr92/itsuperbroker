@@ -44,3 +44,21 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .appmessage {
+    @apply my-2 absolute bottom-2 mx-2 left-0 right-0 bg-red-100 rounded-lg z-50 border-2 border-red-500 text-red-600
+  }
+
+  .appmessage_error {
+    @apply text-red-600 border-red-500 bg-red-100
+  }
+
+  .appmessage_default {
+    @apply text-green-600 border-green-500 bg-green-100
+  }
+
+  .appmessage_warn {
+    @apply text-yellow-600 border-yellow-500 bg-yellow-100
+  }
+</style>

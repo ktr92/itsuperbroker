@@ -1,62 +1,31 @@
 @tailwind components;
+
 @layer components {
-  th, td{
+
+  th,
+  td {
     @apply px-2 py-4 text-left border-b-2
   }
-  button[type="submit"], .button {
+
+  button[type="submit"],
+  .button {
     @apply bg-green-500 rounded text-white px-8 py-2 font-bold inline-block w-full
   }
+
   button.redbutton {
     @apply bg-red-400 rounded text-white px-4
   }
+
   button.button_inline {
     @apply inline-block w-auto
   }
-  .input {
-    @apply rounded border px-4 py-2 w-full inline-block max-w-xs
-  }
-  .appmessage {
-    @apply my-2 absolute bottom-2 mx-2 left-0 right-0 bg-red-100 rounded-lg z-50 border-2 border-red-500 text-red-600
-  }
-  label {
-    @apply block mb-2
-  }
-  .checkbox {
-    @apply cursor-pointer
-  }
-  .checkbox span {
-    @apply rounded border-2 px-2 border-gray-200 opacity-50 inline-block
-  }
-  .checkbox input {
-    @apply opacity-0 w-0
-  }
-  .checkbox span.selected {
-    @apply bg-green-500 border-green-500 text-white opacity-100
-  }
-  .checkbox span.reset {
-    @apply rounded border-2 px-2 border-green-500 opacity-100 inline-block
-  }
+
+
+
   form {
     @apply max-w-xs m-auto
   }
-  .appmessage_error {
-    @apply text-red-600 border-red-500 bg-red-100
-  }
-  .appmessage_default {
-    @apply text-green-600 border-green-500 bg-green-100
-  }
-  .appmessage_warn {
-    @apply text-yellow-600 border-yellow-500 bg-yellow-100
-  }
-  .pager {
-    @apply  my-4 relative z-0 inline-flex rounded-md shadow-sm -space-x-px
-  }
-  .pagerArrow {
-    @apply relative inline-flex items-center px-2 py-2 border border-gray-200 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50
-  }
-  .pagerNumber {
-    @apply border relative inline-flex items-center px-4 py-2 text-sm font-medium
-  }
+
   .navlink {
     @apply bg-green-800 rounded text-white px-8 py-2 font-bold inline-block w-full
   }
@@ -64,6 +33,5 @@
   .nuxt-link-active .navlink {
     @apply bg-green-600
   }
-  
- 
+
 }

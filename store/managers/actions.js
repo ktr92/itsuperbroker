@@ -28,7 +28,6 @@ export default {
       await this.$axios.post(`${process.env.api}/bank/manager`, payload).then((response) => {
         dispatch('setMessage', { value: `${response.data.email} добавлен`, type: 'info' }, { root: true })
         dispatch(ACTION_FETCH, { currentPage: getters[GETTER_GETPAGE], itemsPerPage: getters[GETTER_GETPERPAGE] })
-        /* commit(MUTATION_ADD, response.data) */
       })
     } catch (e) {
       dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })
@@ -39,7 +38,6 @@ export default {
       await this.$axios.delete(`${process.env.api}/bank/manager/${payload}`).then((response) => {
         dispatch('setMessage', { value: `${getters[GETTER_GETONE](payload).email} удален`, type: 'warning' }, { root: true })
         dispatch(ACTION_FETCH, { currentPage: getters[GETTER_GETPAGE], itemsPerPage: getters[GETTER_GETPERPAGE] })
-        /* commit(MUTATION_REMOVE, payload) */
       })
     } catch (e) {
       dispatch('setMessage', { value: `${e.response.data.code}: ${e.response.data.message}`, type: 'error' }, { root: true })

@@ -139,3 +139,15 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  .pager {
+    @apply  my-4 relative z-0 inline-flex rounded-md shadow-sm -space-x-px
+  }
+  .pagerArrow {
+    @apply relative inline-flex items-center px-2 py-2 border border-gray-200 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50
+  }
+  .pagerNumber {
+    @apply border relative inline-flex items-center px-4 py-2 text-sm font-medium
+  }
+</style>

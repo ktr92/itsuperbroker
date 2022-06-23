@@ -65,4 +65,28 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+  label {
+    @apply block mb-2
+  }
+
+  .checkbox {
+    @apply cursor-pointer
+  }
+
+  .checkbox span {
+    @apply rounded border-2 px-2 border-gray-200 opacity-50 inline-block
+  }
+
+  .checkbox input {
+    @apply opacity-0 w-0
+  }
+
+  .checkbox span.selected {
+    @apply bg-green-500 border-green-500 text-white opacity-100
+  }
+
+  .checkbox span.reset {
+    @apply rounded border-2 px-2 border-green-500 opacity-100 inline-block
+  }
+</style>

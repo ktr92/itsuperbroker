@@ -69,6 +69,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .input {
+    @apply rounded border px-4 py-2 w-full inline-block max-w-xs
+  }
 </style>
