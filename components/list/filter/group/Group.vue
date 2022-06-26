@@ -15,7 +15,7 @@ import { GETTER_GETPAGE, GETTER_GETPERPAGE } from '@/store/getter-types'
 // компонент для фильтрации данных
 export default {
   props: {
-    filtered: {
+    itemsfilter: {
       type: Array,
       default: null
     },
@@ -36,7 +36,7 @@ export default {
     return {
       search: this.searchby,
       filter: this.filterby,
-      items: this.filtered,
+      items: this.itemsfilter,
       filterdata: [],
       searchdata: []
     }
@@ -63,7 +63,7 @@ export default {
   },
   watch: {
     itemsSelected () {
-      this.$emit('filter', this.itemsSelected)
+      this.$emit('update:itemsfilter', this.itemsSelected)
     },
     filtered () {
       this.items = this.filtered

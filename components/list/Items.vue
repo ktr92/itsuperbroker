@@ -6,11 +6,10 @@
       </h1>
       <div>
         <LazyListFilterGroup
-          :filtered="items"
+          :itemsfilter.sync="itemsfilter"
           :namespace="namespace"
           :filterby="filterprop"
           :searchby="searchprop"
-          @filter="filter"
         />
         <template
           v-if="itemsfilter.length"

@@ -32,10 +32,5 @@ export default {
       this.itemsfilter = this.list
       this.items = this.list
     }
-  },
-  methods: {
-    filter (data) {
-      this.itemsfilter = data
-    }
   }
 }
