@@ -30,7 +30,7 @@ export default {
   },
   watch: {
     request () {
-      this.$emit('searchlist', this.request.trim().toLowerCase())
+      this.$emit('update:searchlist', this.request.trim().toLowerCase())
     }
   },
   methods: {

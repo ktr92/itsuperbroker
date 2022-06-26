@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LazyListFilterSearch v-if="search" placeholder="Поиск по контактам" @searchlist="searchlist" />
+    <LazyListFilterSearch v-if="search" placeholder="Поиск по контактам" :searchlist.sync="searchdata" />
     <!--  <LazyListFilterCheckbox v-if="filter" :filterby="filterprop" @filterlist="filterlist" /> -->
     <LazyListFilterSelect v-if="filter" :filterby="filter" @selectFetch="selectFetch" @selectReset="selectReset" />
   </div>
@@ -80,10 +80,6 @@ export default {
     },
     async selectReset () {
       await this.$store.dispatch(`${this.namespace}/${ACTION_FETCH}`, { currentPage: this.getPage, itemsPerPage: this.getPerPage, bankId: 0 })
-    },
-    // эмит из компонента ListFilterSearch
-    searchlist (data) {
-      this.searchdata = data
     }
   }
 }
